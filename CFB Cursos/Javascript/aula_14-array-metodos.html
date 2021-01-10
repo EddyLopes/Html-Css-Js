@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //Exemplo1();
+        //Exemplo2();
+        Exemplo3();
+
+        function Exemplo1()
+        {
+            //var cores = new Array();
+            var mochila = [],posicao;
+            mochila.push("faca"); 
+            mochila.push("corda");
+            mochila.push("pederneira");
+            mochila.push("chave");
+            mochila.push("lanterna"); //insere no final
+            mochila.unshift("pedra"); //insere no inicio
+            
+            //mochila.pop(); //remove do final
+            //mochila.shift(); //remove do inicio
+
+            //mochila.splice(3,3); //remove a partir da posição 3 a qtde de elementos passados no segundo parâmetro
+            posicao = mochila.indexOf("lanterna");
+            if(posicao < 0)
+            {
+                document.write("Item não está na mochila<br>");
+            }
+            else
+            {
+                document.write("Item está na mochila na posição: " + posicao + "<br>");
+            }
+
+            document.write(mochila[0]+"<br>");
+            document.write(mochila[1]+"<br>");
+            document.write(mochila[2]+"<br>");
+            document.write(mochila[3]+"<br>");
+            document.write(mochila[4]+"<br>");
+            document.write(mochila[5]+"<br>");
+        }
+
+        function Exemplo2()
+        {
+            var num = [5,8,4,9,7,6,3,0,2,1],numeros;
+
+            numeros = num.join();
+            document.write(numeros+"<br><br>");
+
+            num.forEach(element => {
+                document.write(element+"<br>");
+            });
+
+            num.sort();
+            num.reverse();
+            document.write("<br><br>");
+
+            num.forEach(element => {
+                document.write(element+"<br>");
+            });
+
+        }
+
+        function Exemplo3()
+        {
+            var mochila=[],mochila1=[],mochila2=[];
+            mochila1.push("faca"); 
+            mochila1.push("corda");
+            mochila1.push("pederneira");
+            mochila1.push("chave");
+            mochila1.push("lanterna"); 
+            mochila1.push("pedra"); 
+
+            mochila2.push("faca"); 
+            mochila2.push("corda");
+            mochila2.push("pederneira");
+            mochila2.push("chave");
+            mochila2.push("lanterna"); 
+            mochila2.push("pedra"); 
+
+            mochila=mochila1.concat(mochila2);
+
+            mochila.forEach(x => {
+                document.write(x+"<br>");
+            });
+
+            document.write("<br><br>Tamanho da mochila " + mochila.length);
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

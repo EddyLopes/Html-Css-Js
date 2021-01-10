@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //Exemplo1();
+        Exemplo2();
+
+        function Exemplo1()
+        {
+            var lstNumeros=[];
+            lstNumeros.push(0);
+            lstNumeros.push(1);
+            lstNumeros.push(2);
+            lstNumeros.push(3);
+            lstNumeros.push(4);
+
+            for (var cont = 0; cont < lstNumeros.length; cont++) 
+            {
+                document.write(lstNumeros[cont] +"<br>");
+            }
+        }
+
+        function Exemplo2()
+        {
+            var mochila = [["Corda",1],["Cura",10],["Lanterna",10],["Pilhas",20]];
+
+            for (var cont = 0; cont < mochila.length; cont++) 
+            {
+                for (var cont2 = 0; cont2 < mochila[cont].length; cont2++) {
+                    document.write(mochila[cont][cont2] +" ");
+                }
+                
+                document.write("<br>");
+            }
+        }
+
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

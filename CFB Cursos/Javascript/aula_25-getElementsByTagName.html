@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+    </script>
+</head>
+<body>
+    <p id="texto">CFB Cursos</p>    
+    <p>Curso de Javascript</p>
+    <p>Aula 25</p>
+    <p>https://www.youtube.com/watch?v=gP0_rmzpKEc&list=PLx4x_zx8csUj3IbPQ4_X5jis_SkCol3eC&index=25</p>
+    <p>cfbcursos.com.br</p>
+    <hr/>
+
+    <script>
+        //Exemplo1();
+
+        function Exemplo1()
+        {
+            var lstTagsP = document.getElementsByTagName("p");//[2] pode pegar o elemento por aqui tbm, se colocar o "*" captura todos os elementos
+            document.write(lstTagsP[0].innerHTML);
+
+            for (let i = 0; i < lstTagsP.length; i++) 
+            {
+                lstTagsP[i].style.color = "#f00";    
+            }
+        }
+    </script>
+</body>
+</html>

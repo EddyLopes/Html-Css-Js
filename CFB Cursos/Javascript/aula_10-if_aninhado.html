@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var nota = 100;
+        var resultado;
+        
+        if(nota >= 60)
+        {
+            resultado = "Aprovado"
+            if(nota >= 95)
+            {
+                if(nota == 100)
+                {
+                    resultado += " com excelência";
+                }
+                else
+                {
+                    resultado += " com louvor";
+                }
+            }
+            else
+            {
+                resultado += " com nota normal"
+            }
+        }
+        else if(nota >= 40)
+        {
+            resultado = "Recuperação";
+        }
+        else
+        {
+            resultado = "Reprovado";
+            if(nota <= 20)
+            {
+                resultado += " com louvor";
+            }
+            else
+            {
+                resultado += " com nota baixa";
+            }
+        }
+
+        document.write(resultado);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
