@@ -1,0 +1,24 @@
+<meta charset="latin1">
+<script>
+function pulaLinha() {
+    document.write("<br><br>");
+}
+
+function mostra(frase) {
+    document.write(frase);
+    pulaLinha();
+}
+
+var qtdeFamiliares = parseInt(prompt("Informe a qtde de membros na família:"));
+var i = 1;
+var idade;
+var totalIdades = 0;
+while(i <= qtdeFamiliares){	
+	idade = parseInt(prompt("Informe a idade do familiar " + i + ":"));	
+	totalIdades += idade;
+	mostra("Idade Familiar " + i + ": " + idade)
+	i++;
+}
+mostra("Soma das idades: " + totalIdades);
+mostra("Média de idade da família: " + (totalIdades/qtdeFamiliares));
+</script>

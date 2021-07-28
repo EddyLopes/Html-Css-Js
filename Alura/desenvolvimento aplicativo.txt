@@ -1,0 +1,6 @@
+1- Conhecer as dores do cliente
+2- Ver o que já tem no mercado;
+3- Definir qual framework vai utilizar para desenvolver o aplicativo;
+4- Definir o MVP do app, resolver o problema do cliente;
+5- Fazer um protótipo, trazer algo jah pronto para o cliente;
+6- Fazer as versões do aplicativo utilizando a metodologia Moscow

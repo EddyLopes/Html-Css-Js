@@ -1,0 +1,31 @@
+<meta charset="latin1">
+<script>
+	function pulaLinha() {
+        document.write("<br>");
+    }
+
+    function mostra(frase) {
+        document.write(frase);
+        pulaLinha();
+    }
+     
+	mostra("Com for:");
+	pulaLinha();
+	
+	for( var i = 0; i < 10; i++ ) {
+		mostra( "O resultado é " + (2 * i) );
+	}
+	
+	
+	pulaLinha();
+	pulaLinha();
+	mostra("Com while:");
+	pulaLinha();
+	
+	var i = 0;
+	while(i < 10){
+		mostra( "O resultado é " + (2 * i) );
+		i++;
+	}
+	
+</script>
