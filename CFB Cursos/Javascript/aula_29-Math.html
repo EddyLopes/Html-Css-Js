@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+
+    <script>
+        //document.write(Math.PI);
+        var valor = 59;
+        var resultadoMegaSena = new Array();
+        qtdeNum = 0;
+
+        
+        while (qtdeNum < 6) 
+        {
+            let num = Math.round(Math.random()*valor)+1;
+            if(resultadoMegaSena.indexOf(num) != -1) continue;
+            
+            qtdeNum++;
+            resultadoMegaSena.push(num);
+        }
+
+        resultadoMegaSena.sort((a,b) =>
+        {
+            if(a > b) return 1;
+            if(a < b) return -1;
+
+            return 0;
+        });
+
+        resultadoMegaSena.forEach(element => 
+        {
+            document.write(element+"<br>");
+        });
+
+       
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

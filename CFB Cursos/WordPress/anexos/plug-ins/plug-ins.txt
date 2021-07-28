@@ -1,0 +1,5 @@
+Huge-IT slider
+https://wordpress.org/plugins/slider-image/
+
+Contact Form
+https://wordpress.org/plugins/contact-form-7/

@@ -24,21 +24,76 @@
             display: block;
         }
 
+        .quadro
+        {
+            background-color: #bbb;
+        }
+
     </style>
-    <script>
-    </script>
+
 </head>
 <body>
     <h1 class="titulo">querySelectorAll</h1>
     <p>O querySelectorAll() é um método que retorna os elementos do documento que correspondem a uma classe de css ou a um tag específica.</p>
     <h2 class="titulo">Curso de Javascript</h2>
     <p>www.youtube.com.br/cgbcursos</p>
-    <p>cfbcursos.com.br</p>
+    <p class="titulo">cfbcursos.com.br</p>
     <div>
+        <h3>Javascript aula 26</h3>
+        <p>Este texto está dentro da DIV</p>
+        <p>Este também</p>
+    </div>
+    <div class="quadro">
+        <h3>Javascript aula 26</h3>
         <p>Este texto está dentro da DIV</p>
         <p>Este também</p>
     </div>
     <a href="http://www.youtube.com/cfbcursos" target="_blank">CANAL</a>
     <a href="http://cfbcursos.com.br">SITE</a>
+    <hr>
+
+    <script>
+        //PegaTodosElementosDaClasseTitulo();
+        //SomenteElementosPQueUsemAClassTitulo();
+        SomenteElementosPQueEstaoDentroDaDiv();
+
+        function Exemplo1()
+        {
+            var lstPs = document.querySelectorAll("p");
+            //document.write(lstPs[0].innerHTML);
+            //lstPs[0].style.color="#00f";
+        }
+
+        function PegaTodosElementosDaClasseTitulo()
+        {
+            var lstElementos = document.querySelectorAll(".titulo");
+
+            for (let i = 0; i < lstElementos.length; i++) {
+                document.write(lstElementos[i].innerHTML + "<br>");                
+            }
+        }
+        
+        function SomenteElementosPQueUsemAClassTitulo()
+        {
+            var lstElementos = document.querySelectorAll("p.titulo");
+
+            for (let i = 0; i < lstElementos.length; i++) {
+                document.write(lstElementos[i].innerHTML + "<br>");                
+            }
+        }
+
+        function SomenteElementosPQueEstaoDentroDaDiv()
+        {
+            //var lstElementos = document.querySelectorAll("DIV > p");
+            //var lstElementos = document.querySelectorAll("DIV > *"); //todos elementos que estão dentro de uma div
+            //var lstElementos = document.querySelectorAll("div.quadro > *"); //todos elementos que estão dentro associada a classe quadro
+            var lstElementos = document.querySelectorAll("p,h1,h3"); //selecionar mais de um elemento
+
+            for (let i = 0; i < lstElementos.length; i++) 
+            {
+                lstElementos[i].style.color="#0a0";
+            }
+        }
+    </script>
 </body>
 </html>

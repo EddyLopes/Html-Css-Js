@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #jogador
+        {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-color: #00f;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+
+    <script>
+        var jog;
+        var vel;
+        var dx;
+        var dy;
+        var px;
+        var py;
+        var anima;
+        var seAnimacao = true;
+
+        function game()
+        {
+            px+=(dx*vel);
+            //py+=dy*vel;
+            jog.style.left=px+"px";
+            //jog.style.top=py+"px";
+
+            if(px > 800)
+            {
+                dx=-1;
+            }
+            else if(px < 0)
+            {
+                dx=1;
+            }
+
+            anima=requestAnimationFrame(game);
+        }
+
+        function moverParar()
+        {
+            if(seAnimacao)
+            {
+                seAnimacao = false;
+                jog.style.backgroundColor="#f00";
+                cancelAnimationFrame(anima);
+            }
+            else    
+            {
+                seAnimacao = true;
+                jog.style.backgroundColor="#00f";
+                anima=requestAnimationFrame(game);
+            }
+        }
+
+        function inicia()
+        {
+            vel=2;
+            dx=1;
+            dy=0;
+            px=0;
+            py=0;
+            
+            jog=document.getElementById("jogador");
+
+            jog.addEventListener("click",moverParar);
+
+            document.getElementById("btIniciar").addEventListener("click",function()
+            {
+                if(seAnimacao == false)
+                {
+                    seAnimacao = true;
+                    jog.style.backgroundColor="#00f";
+                    anima=requestAnimationFrame(game);
+                }
+            });
+
+            document.getElementById("btParar").addEventListener("click",function()
+            {
+                if(seAnimacao == true)
+                {
+                    seAnimacao = false;
+                    jog.style.backgroundColor="#f00";
+                    cancelAnimationFrame(anima);
+                }
+            });
+
+            game();
+        }
+
+        window.addEventListener("load",inicia);
+        
+    </script>
+</head>
+<body>
+    <div id="jogador"></div>
+    <button id="btIniciar">Iniciar</button>
+    <button id="btParar">Parar</button>
+</body>
+</html>

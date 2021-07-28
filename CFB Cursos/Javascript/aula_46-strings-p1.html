@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+    <script>
+       
+    </script>
+</head>
+<body>
+    <p id="txt">CFB Cursos - Curso de Javascript - aula 46 do curso de javascript</p>
+    <script>
+        var texto = document.getElementById("txt").innerText;
+        Exemplo14();
+        
+        function Exemplo1()
+        {
+            //i -> Busca sem case-sensitive, ou seja, não diferencia letras maiúsculas de minúsculas;
+            //g -> diz ao método para encontrar todas as ocorrências da palavra e não parar na primeira encontrada, cada ocorrência é armazenada em uma posição do array;
+            //m -> pesquisa normal sem armazenar em forma de array;
+
+            //var res = texto.match(/de/g); 
+            //var res = texto.match(/Javascript/ig); 
+
+            //var res = texto.match(/[oa]/ig); 
+            //var res = texto.match(/[^oa]/ig); //pesquisar todos caracteres menos o [oa]
+            var res = texto.match(/[a-g]/ig); //pesquisar todos caracteres entre a letra a e g
+            document.write(res + " - " + res.length);
+        }
+
+        function Exemplo2()
+        {
+            var res = texto.search(/aula/i); 
+            document.write(res);
+        }
+
+        function Exemplo3()
+        {
+            var res = texto.replace(/curso/ig,"aula"); 
+            document.write(res);
+        }
+
+        function Exemplo4()
+        {
+            //var res = texto.charAt(2);
+            var res = texto.charCodeAt(2);
+            document.write(res + "<br>");
+            document.write(String.fromCharCode(66));
+        }
+
+        function Exemplo5()
+        {
+            var txt2 = "<br>Edimar Lopes e Gabriel Costa Lopes";
+            var res = texto.concat(txt2);
+            document.write(res);
+        }
+
+        function Exemplo6()
+        {
+            //var res = texto.indexOf("u");
+            var res = texto.lastIndexOf("p");
+            document.write(res);
+        }
+    
+        function Exemplo7()
+        {
+            //var txt2 = texto;
+            var txt2 = "lopes";
+            var res = texto.localeCompare(txt2);
+            document.write(res+"<br>");
+            //0 iguais
+            //!= diferentes
+            if(res == 0)
+            {
+                document.write("texto igual");
+            }
+            else
+            {
+                document.write("texto diferente");
+            }
+        }
+            
+        function Exemplo8()
+        {
+            var res = texto.slice(3,10);
+            document.write(res);
+
+        }
+
+        function Exemplo9()
+        {
+            var res = texto.split(" ");
+            res.forEach(x => {
+                document.write(x+"<br>");
+            });
+        }
+
+        function Exemplo10()
+        {
+            var res = texto.substr(4,6);
+            document.write(res);
+        }
+
+        function Exemplo11()
+        {
+            //var res = texto.toLocaleLowerCase()
+            var res = texto.toUpperCase()
+            document.write(res);
+        }
+
+        function Exemplo12()
+        {
+            var num = 15;
+
+            var res = num.toString();
+            var bin = num.toString(2);
+            var oct = num.toString(8);
+            var hex = num.toString(16);
+
+            document.write(res+"<br>");
+            document.write(bin+"<br>");
+            document.write(oct+"<br>");
+            document.write(hex);
+        }
+
+        function Exemplo13()
+        {
+            var texto = "             CFB Cursos - Curso de Javascript - aula 46 do curso de javascript";
+            alert(texto.trim());
+        }
+
+        function Exemplo14()
+        {
+            var texto = "CFB Cursos - \"Curso de\" Javascript - aula 46 do curso \nde javascript";
+            alert(texto);
+        }
+    </script>
+</body>
+</html>

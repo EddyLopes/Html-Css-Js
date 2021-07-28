@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #carro
+        {
+            width: 1000;
+            height: 900px;
+        }
+        .c1
+        {
+            background-image:url("imgs/c1.jpg");
+        }
+        .c2 
+        {
+            background-image:url("imgs/c2.jpg");
+        }
+        .c3
+        {
+            background-image:url("imgs/c3.jpg");
+        }
+    </style>
+    <script>
+        function trocaCarro(c)
+        {
+            switch (c) {
+                case 1:
+                    {
+                        document.getElementById("carro").setAttribute("class","c1");
+                        break;
+                    }
+                    case 2:
+                    {
+                        document.getElementById("carro").setAttribute("class","c2");
+                        break;
+                    }
+                    case 3:
+                    {
+                        document.getElementById("carro").setAttribute("class","c3");
+                        break;
+                    }                            
+                default:
+                    break;
+            }
+        }
+
+        function removeCarro()
+        {
+            document.getElementById("carro").removeAttribute("class");
+        }
+
+        function verificaSeAtributoExiste()
+        {
+            if(document.getElementById("carro").hasAttribute("class"))
+                alert("Atributo existe");
+            else
+                alert("Atributo não existe");
+
+        }
+    </script>
+</head>
+<body>
+    <button onclick="trocaCarro(1)">Carro 1</button>
+    <button onclick="trocaCarro(2)">Carro 2</button>
+    <button onclick="trocaCarro(3)">Carro 3</button>
+    <button onclick="removeCarro()">Remover Carro</button>
+    <button onclick="verificaSeAtributoExiste()">Verifica Atributo</button>
+    <div id="carro"></div>
+
+
+</body>
+</html>
