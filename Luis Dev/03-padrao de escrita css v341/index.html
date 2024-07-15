@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        1) usar "-" para separar nomes
+        2) imagine tudo como um componente ou object
+        3) use a especifidade direta para qualquer classe
+        4) utilize "-"" para editar variações
+        5) use o "_" para editar classes com o !important 
+    -->
+
+    <style>
+        /*
+            ld-button
+            variações: -danger, -warning
+        */
+        .ld-button{
+            border: 1px solid black;  
+            padding: 10px 20px 10px 20px;
+            background-color: white;
+            border-radius: 3px;
+        }
+
+        .ld-button.-danger{
+            color: red;
+            border-color: red;
+        }
+        .ld-button.-warning{
+            color: rgb(255,238,0);
+            border-color: rgb(255,238,0)
+        }
+
+        .ld-card{
+            width: 200px;
+            height: 200px;
+            background-color: bisque;
+
+        }
+
+        .ld-card > .title{
+            color: red;
+        }
+
+        .ld-card > .box{
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+        }
+    </style>
+
+    <button class="ld-button -danger">Luis Dev</button>
+    <div class="ld-card">
+        <h1 class="title">Título</h1>
+        <div class="box">
+            Box 
+        </div>
+    </div>
+</body>
+</html>
