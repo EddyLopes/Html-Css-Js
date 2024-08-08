@@ -4,9 +4,13 @@
 }
 
 .ld-wrapper >.main-content{
-    padding-top: var(--ld-header-size);
     display: grid;
     grid-template-columns: 1fr 1fr;
+    padding-top: var(--ld-header-size);
+}
+
+.ld-wrapper >.main-content.-one-col{
+    grid-template-columns: 1fr;
 }
 
 .ld-wrapper >.main-content >.left{

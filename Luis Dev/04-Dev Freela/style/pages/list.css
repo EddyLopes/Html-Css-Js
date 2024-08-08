@@ -1,3 +1,19 @@
-.ld-list {
-    
+.ld-list >.ld-wrapper >.main-content >.title-button {
+     margin-top: 70px;
+     display: flex;
+     justify-content: space-between;
+     width: 100%;
+}
+
+.ld-list >.ld-wrapper >.main-content >.title-button >.title {
+    font-weight: 700;        
+    font-size: calc(var(--ld-font-size-base) + 30px);
+}
+
+.ld-list >.ld-wrapper >.main-content >.title-button >.button-wrapper {
+     
+}
+
+.ld-list >.ld-wrapper >.main-content .table-wrapper {
+    margin-top: 32px;
 }
