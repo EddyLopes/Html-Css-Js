@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Example</title>
+  <style>
+    .block {
+      display: block;
+      width: 150px;
+      height: 50px;
+      background-color: lightblue;
+      margin: 10px;
+    }
+    .inline {
+      display: inline;
+      width: 150px; /* Não funciona */
+      height: 50px; /* Não funciona */
+      background-color: lightgreen;
+      margin: 10px;
+    }
+    .inline-block {
+      display: inline-block;
+      width: 150px;
+      height: 50px;
+      background-color: lightcoral;
+      margin: 10px;
+    }
+
+    .menu {
+      text-align: center;
+      background-color: #f0f0f0;
+      padding: 10px;
+    }
+    .menu-item {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      margin: 5px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .menu-item:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>Block:</h2>
+  <div class="block">Elemento Block</div>
+  <div class="block">Elemento Block</div>
+  
+  <h2>Inline:</h2>
+  <span class="inline">Elemento Inline</span>
+  <span class="inline">Elemento Inline</span>
+  
+  <h2>Inline-Block:</h2>
+  <div class="inline-block">Elemento Inline-Block</div>
+  <div class="inline-block">Elemento Inline-Block</div>
+
+  <table><thead><tr><th>Propriedade</th><th><code>block</code></th><th><code>inline</code></th><th><code>inline-block</code></th></tr></thead><tbody><tr><td>Inicia nova linha?</td><td>Sim</td><td>Não</td><td>Não</td></tr><tr><td>Largura padrão</td><td>Ocupa 100% do contêiner</td><td>Apenas o conteúdo</td><td>Apenas o conteúdo</td></tr><tr><td>Define <code>width</code>/<code>height</code>?</td><td>Sim</td><td>Não</td><td>Sim</td></tr><tr><td>Respeita o box model?</td><td>Sim</td><td>Parcialmente</td><td>Sim</td></tr></tbody></table>
+
+  <h3>Quando Usar <code>display: inline-block</code></h3>
+  <ol><li><p><strong>Criação de layouts em linha com dimensões específicas</strong>:<br>Exemplo: botões de tamanhos específicos alinhados horizontalmente.</p></li><li><p><strong>Elementos estilizados em linha</strong>:<br>Exemplo: criar menus horizontais, onde cada item pode ter largura e altura definidas.</p></li><li><p><strong>Substituir elementos <code>float</code> em layouts simples</strong>:<br><code>inline-block</code> é uma alternativa a <code>float</code> para alinhamento horizontal de elementos.</p></li></ol>
+
+  <div class="menu">
+    <a href="#" class="menu-item">Home</a>
+    <a href="#" class="menu-item">About</a>
+    <a href="#" class="menu-item">Services</a>
+    <a href="#" class="menu-item">Contact</a>
+  </div>
+
+  <h3>Observação Importante</h3>
+  <ul><li><strong>Espaços entre elementos <code>inline-block</code></strong>:<br>Por padrão, há um pequeno espaço entre elementos <code>inline-block</code> devido aos espaços em branco no HTML. Para corrigir isso:<ol><li>Use <code>font-size: 0</code> no contêiner pai.</li><li>Remova os espaços em branco no HTML entre os elementos.</li><li>Use comentários (<code>&lt;!-- --&gt;</code>) para evitar o espaço.</li></ol></li></ul>
+
+  <h3>Conclusão</h3>
+  <p><code>inline-block</code> é uma solução poderosa para criar layouts flexíveis e organizados, especialmente quando você precisa de elementos alinhados horizontalmente, mas ainda quer controle total sobre suas dimensões.</p>
+</body>
+</html>
