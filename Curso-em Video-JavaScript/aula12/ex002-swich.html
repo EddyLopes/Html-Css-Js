@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>teste</h1>
+
+    <script>
+        var horaAtual = new Date()
+        var diaSemana = horaAtual.getDay()
+        diaSemana = 0
+
+        console.log(`Dia da semana ${diaSemana}`)
+
+        switch(diaSemana) {
+            case 0:
+                console.log('Domingo')
+                break
+            case 1:
+                console.log('Segunda')
+                break
+            case 2:
+                console.log('Terça')
+                break
+            case 3:
+                console.log('Quarta')
+                break
+            case 4:
+                console.log('Quinta')
+                break
+            case 5:
+                console.log('Sexta')
+                break
+            case 6:
+                console.log('Sábado')
+                break
+            default:
+                console.log('Dia inválido')
+                break
+        }
+
+    </script>
+</body>
+</html>
