@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Manual Pessoal - ASV</title>
+        <link href="menu.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+        <nav>
+                <h2>Sumário</h2>
+                <input id="searchBox" placeholder="Buscar..." style="width: 100%; padding: 6px; margin-bottom: 12px;"
+                        type="text" />
+                <div class="treeview">
+                        <ul id="toc-list">
+                                <li>
+                                        <span class="caret"><i class="fa-solid fa-angle-right"></i> Manual
+                                                Técnico</span>
+                                        <ul class="nested">
+                                                <li>
+                                                        <span class="caret"><i class="fa-solid fa-angle-right"></i>
+                                                                Getting Started</span>
+                                                        <ul class="nested">
+                                                                <li><a href="#introducao">Introdução</a></li>
+                                                                <li>
+                                                                        <span class="caret"><i
+                                                                                        class="fa-solid fa-angle-right"></i>
+                                                                                Tutoriais</span>
+                                                                        <ul class="nested">
+                                                                                <li><a href="#validar-email">Validar
+                                                                                                E-mail</a></li>
+                                                                        </ul>
+                                                                </li>
+                                                        </ul>
+                                                </li>
+                                                <li><a href="#asverros-inc"><i class="fa-solid fa-angle-right"></i>
+                                                                AsvErros.inc</a></li>
+                                        </ul>
+                                </li>
+                        </ul>
+                </div>
+        </nav>
+
+        <main>
+                <section id="conteudo">
+                        <h1>anotações</h1>
+                        <h2>compilação geral solution</h2>
+                        <h3>Alterações feitas no cclp</h3>
+                        <p>alterar a classe AsvOrganiza setando as variáveis nome tabela para cstring(2000), essa
+                                alteração foi feita no
+                                cclp;</p>
+                        <p><strong>alterar AsvUtil, métodos: AddCampoExcel, ExportaQueueParaExcel, ExportaQueueParaArq
+                                        foi incluído opção
+                                        para remover caracteres especiais, no cclp já foi feito;</strong></p>
+                        <p><strong>alteração classe AsvSql CreateTempTable foi alterado no cclp para exibir show
+                                        sql;</strong></p>
+                        <p><strong>alteração classe AsvSql: CreateTempFile</strong></p>
+                        <p><strong>propriedade: DescErro CString(5000), PRIVATE</strong></p>
+                        <p>AsvErros.inc:</p>
+                        <p>gNivelLog GROUP,STATIC</p>
+                        <pre>NaoDefinido BYTE(0)</pre>
+                        <pre>Erro        BYTE(1)</pre>
+                        <pre>OkAlerta    BYTE(2)</pre>
+                        <pre>Ok          BYTE(3)</pre>
+                        <pre>OkAtencao   BYTE(4) !usa o ícone de exclamação para chamar a atenção</pre>
+                        <p>END</p>
+                        <p>Asvutil.inc</p>
+                        <p>AsvErros.inc</p>
+                        <p><strong>DescResumo CSTRING(5000),PRIVATE</strong></p>
+                        <p>AsvErros.clw</p>
+                        <p>AsvUtil:</p>
+                        <p>Incluído rotina de valida email, foi alterado também o SqlDAO para _SqlDAO privado;</p>
+                        <p>AsvUtil.inc, clw</p>
+                        <p>Incluído rotinas:</p>
+                        <pre>NewQEstados                   PROCEDURE()</pre>
+                        <pre>SeUFValida                    PROCEDURE(STRING pUF),BYTE</pre>
+                        <p>Incluído a queue de estados</p>
+                        <p>AsvErros.inc, clw</p>
+                        <p>Incluído coluna DescNivelLog na queue de erros, adicionado método:</p>
+                        <pre>GetDescNivelLog PROCEDURE(BYTE pNivelLog)</pre>
+                        <p><strong>e alterado o procedimento: AddLog para gravar a coluna nova.</strong></p>
+                        <h1>clarion</h1>
+                        <h2>úteis</h2>
+                        <h3>Pegando primeiro e último dia do mês</h3>
+                        <pre>LOC:DataMovtoInicial = DATE(MONTH(GLO:DataProc),1,YEAR(GLO:DataProc))  !Primeiro dia do mês</pre>
+                        <pre>LOC:DataMovtoFinal = (DATE(MONTH(GLO:DataProc) + 1,1,YEAR(GLO:DataProc)) - 1 ) !último dia do mês</pre>
+                        <h3>Usando tela de logs de processamento</h3>
+                        <h4>Tela padrão: winLogErrosNovo;</h4>
+                        <h4>Exemplo de uso:</h4>
+                        <pre>LOC:CCLP ClassCCLP</pre>
+                        <pre>ConverteLeiauteSJ PROCEDURE()</pre>
+                        <pre>xGCodLogs                                   GROUP,STATIC</pre>
+                        <pre>ArqImoveisPrincipaisComErroNoValorEnglobado   BYTE(1)</pre>
+                        <pre>QtdeRegArquivo                                BYTE(2)</pre>
+                        <pre>RegsImportados                                BYTE(3)</pre>
+                        <pre>CancNaoExisteNaBase                           BYTE(4)</pre>
+                        <pre>ImoveisNovosEnglobados                        BYTE(5)</pre>
+                        <pre>ErroNaInclusao                                BYTE(6)</pre>
+                        <pre>VlrEnglobamentoIncorreto                      BYTE(7)</pre>
+                        <pre>ErroExclusaoTabPM_Arquivo                     BYTE(8)</pre>
+                        <pre>END</pre>
+                        <pre>CODE</pre>
+                        <pre>LOC:CCLP.AsvErro.ClearAll('ConverteLeiauteSJ')</pre>
+                        <pre>LOC:CCLP.AsvErro.DescProcesso = 'Importação arquivo PM'</pre>
+                        <pre>LOC:CCLP.AsvErro.NewQQtdeLogs()</pre>
+                        <pre>LOC:CCLP.AsvErro.AddQQtdeLogs(xGCodLogs.QtdeRegArquivo,'Qtde de linhas no arquivo',LOC:QtdeRegArquivo)</pre>
+                        <pre>LOC:CCLP.AsvErro.AddQQtdeLogs(xGCodLogs.CancNaoExisteNaBase,'Qtde que vieram cancelados no arquivo PM que não existe no CCLP (não importados)')</pre>
+                        <pre>LOC:CCLP.AsvErro.AddQQtdeLogs(xGCodLogs.ImoveisNovosEnglobados,'Qtde imóveis novos englobados não importados')</pre>
+                        <pre>LOC:CCLP.AsvErro.AddQQtdeLogs(xGCodLogs.VlrEnglobamentoIncorreto,'Qtde com erro no vlr do englobamento (não importado)')</pre>
+                        <pre>LOC:CCLP.AsvErro.AddQQtdeLogs(xGCodLogs.ErroExclusaoTabPM_Arquivo,'Qtde com erro de exclusão tabela PM_Arquivo')</pre>
+                        <pre>LOC:CCLP.AsvErro.AddLog(gNivelLog.OkAlerta,'Imóvel não existe na base do CCLP e veio com data demolição preenchida no arquivo PM. Nr Dic: ' &amp; PMAR:NrDic &amp;', Data demolição: '&amp; FORMAT(PMAR:DataDemolicao,@d06),,xGCodLogs.CancNaoExisteNaBase)</pre>
+                        <pre>LOC:CCLP.AsvErro.AddQQtdeLogs(xGCodLogs.RegsImportados,'Qtde regs importados',LOC:QtdeRegImportados)</pre>
+                        <pre>LOC:CCLP.AsvErro.SetDescResumo(LOC:CCLP.AsvErro.MontaDescResumoAutomatico())</pre>
+                        <pre>POST(EVENT:Accepted,?BtnLogsImportacao)</pre>
+                        <h3>Anotações em procedures</h3>
+                        <p><strong>!!!<summary>Busca as cobranças do imóvel desconsiderando parcela de crédito (I) e
+                                                classifica conforme
+                                                enum: SitCobrancas_ClassImovel</summary></strong></p>
+                        <p><strong>!!!
+                                        <param name="pCodImovel" />Imóvel para busca das cobranças.
+                                </strong></p>
+                        <p><strong>!!!<returns>Retorna conforme enum: SitCobrancas_ClassImovel.</returns></strong></p>
+                        <h3>Concatenar vários campos</h3>
+                        <pre>LOC:Solution.AddQConcatCampos('Produto:',CLIP(GETI:gCodProduto),TRUE,TRUE)</pre>
+                        <pre>LOC:Solution.AddQConcatCampos('variante:',CLIP(GETI:gCodVariante))</pre>
+                        <pre>LOC:Solution.AddQConcatCampos('nr volume:',GETI:gNrVolume)</pre>
+                        <pre>LOC:Solution.AddQConcatCampos('nr etiqueta',GETI:gNrEtiqueta)</pre>
+                        <pre>gravaLogSistema('frmAtendimento.btnCancelarItem',LOC:NrOrdemFat,'NrOrdemFat','','','Item cancelado. '&amp; LOC:Solution.MontaConcatCampos()</pre>
+                        <pre>AddQConcatCampos              PROCEDURE(STRING pDescCampo,STRING pVlrCampo,BYTE pConcatSeVlrBranco=FALSE,BYTE pLimpaQ=FALSE)</pre>
+                        <pre>MontaConcatCampos             PROCEDURE(BYTE pColocaVlrCampoEntreParentesis=FALSE,,BYTE pNoSpace=FALSE),STRING</pre>
+                        <h3>Pegando msg de erro do FileManager</h3>
+                        <p>IF Access:OrdemFatAte.Insert() &lt;&gt; Level:Benign</p>
+                        <p>MESSAGE('Erro ao tentar incluir ordem de faturamento atendida.|' &amp;
+                                Access:OrdemFatAte.GetMsgErro(),'Aviso',icon:hand)</p>
+                        <p>END</p>
+                        <h3>Free em queue com outra queue interna</h3>
+                        <h3>Sobrescrever procedure Message</h3>
+                        <p><strong>MAP</strong></p>
+                        <p><strong>MessageTeste FUNCTION(STRING MessageTxt,<string headingtxt="">,<string iconsent="">,
+                                                        <string buttonspar="">,UNSIGNED MsgDefaults=0,BOOL
+                                                                StylePar=FALSE),LONG</string>
+                                                </string>
+                                        </string></strong></p>
+                        <p><strong>END</strong></p>
+                        <p><strong>! dentro do init</strong></p>
+                        <p><strong>System{Prop:MessageHook} = Address(MessageTeste)</strong></p>
+                        <p><strong>MessageTeste FUNCTION(STRING MessageTxt,<string headingtxt="">,<string iconsent="">,
+                                                        <string buttonspar="">,UNSIGNED MsgDefaults=0,BOOL
+                                                                StylePar=FALSE)</string>
+                                                </string>
+                                        </string></strong></p>
+                        <h3>Message</h3>
+                        <h4>Opção de cópia</h4>
+                        <h3>Escondendo coluna do List</h3>
+                        <p><strong>VarifSeEscondeColunaTamanho ROUTINE</strong></p>
+                        <p><strong>DATA</strong></p>
+                        <p><strong>xCont LONG</strong></p>
+                        <p><strong>CODE</strong></p>
+                        <p><strong>xCont = 0</strong></p>
+                        <p><strong>LOOP</strong></p>
+                        <p><strong>xCont += 1</strong></p>
+                        <p><strong>IF ?List1{PROPLIST:FieldNo,xCont} = 0 THEN BREAK END</strong></p>
+                        <p><strong>IF ?List1{PROPLIST:FieldNo,xCont} = WHERE(Ordem,Ordem.CodTamanho)</strong></p>
+                        <p><strong>?List1{PROPLIST:width,xCont} = 0</strong></p>
+                        <p><strong>BREAK</strong></p>
+                        <p><strong>END</strong></p>
+                        <pre>END</pre>
+                        <h2>loops</h2>
+                        <h3>Excluindo registro da queue</h3>
+                        <h3>Exemplos de loop</h3>
+                        <h4>Controlando a hora de sair do loop</h4>
+                        <pre>i# = 0</pre>
+                        <pre>loop</pre>
+                        <pre>i# += 1</pre>
+                        <pre>get(QMesAno, i#)</pre>
+                        <pre>if errorcode() then break.</pre>
+                        <pre>if LOC:Acumulador = 1</pre>
+                        <pre>ARQ:Reg = clip(ARQ:Reg) &amp;  '"' &amp; year(QMA:MesAno) &amp; '"' &amp; chr(9)</pre>
+                        <pre>else</pre>
+                        <pre>ARQ:Reg = clip(ARQ:Reg) &amp;  '"' &amp; format(QMA:MesAno, @D014) &amp; '"' &amp;     chr(9)</pre>
+                        <pre>end</pre>
+                        <pre>end</pre>
+                        <h4>Controlando saída do loop no final</h4>
+                        <p><strong>LOOP</strong></p>
+                        <p><strong>!inicia variáveis</strong></p>
+                        <pre>LOC:QtdePedidaTemp   = 0</pre>
+                        <pre>LOC:QtdePedidaTemp1  = 0</pre>
+                        <pre>LOC:QtdePedidaTemp2  = 0</pre>
+                        <p><strong>i# += 1</strong></p>
+                        <p><strong>get(GPedIte, i#)</strong></p>
+                        <p><strong>if errorcode() then break.</strong></p>
+                        <p><strong>END</strong></p>
+                        <h4>Loop em arquivo</h4>
+                        <p><strong>set(ArqExporta)</strong></p>
+                        <p><strong>loop</strong></p>
+                        <p><strong>next(ArqExporta)</strong></p>
+                        <p><strong>if errorcode() then break.</strong></p>
+                        <p><strong>AEX:Reg = RemoveCaracterEspecial(AEX:Reg)</strong></p>
+                        <p><strong>put(ArqExporta)</strong></p>
+                        <p><strong>end</strong></p>
+                        <p><strong>set(ArqExporta)</strong></p>
+                        <p><strong>loop</strong></p>
+                        <p><strong>next(ArqExporta)</strong></p>
+                        <p><strong>if errorcode() then break.</strong></p>
+                        <p><strong>End</strong></p>
+                        <h4>Excluindo registros</h4>
+                        <p><strong>loop I# = 1 to Records(QueueRel)</strong></p>
+                        <p><strong>Get(QueueRel, I#)</strong></p>
+                        <p><strong>if ErrorCode() Then Break.</strong></p>
+                        <p><strong>if (QRL:QtdeDisponivel &gt;= 0)</strong></p>
+                        <p><strong>Delete(QueueRel)</strong></p>
+                        <p><strong>I# -= 1</strong></p>
+                        <p><strong>end</strong></p>
+                        <p><strong>end</strong></p>
+                        <h4>Nos controles da tela</h4>
+                        <p><strong>loop I# = firstfield() to lastfield()</strong></p>
+                        <p><strong>I#{PROP:Disable} = True</strong></p>
+                        <p><strong>end</strong></p>
+                        <h2>List Label</h2>
+                        <h3>Link dos error codes</h3>
+                        <p>https://docu.combit.net/progref/en/index.html#!Documents/generalerrorcodes.htm</p>
+                        <h1>C#</h1>
+                        <h2>Úteis</h2>
+                        <h3>Equivalente ao equate</h3>
+                        <p>Utilizado no Força de Vendas ASV.SmartSalesUniversalAndroid na classe Consultas.</p>
+                        <p>public static void PropertyCopier<tenviar, treceber="">(TEnviar enviar, TReceber receber)
+                                </tenviar,>
+                        </p>
+                        <p>{</p>
+                        <p>var enviarProperties = enviar.GetType().GetProperties();</p>
+                        <p>var receberProperties = receber.GetType().GetProperties();</p>
+                        <p>foreach (var enviarProperty in enviarProperties)</p>
+                        <p>{</p>
+                        <p>foreach (var receberProperty in receberProperties)</p>
+                        <p>{</p>
+                        <p>if (enviarProperty.Name == receberProperty.Name &amp;&amp; enviarProperty.PropertyType ==
+                                receberProperty.PropertyType)</p>
+                        <p>{</p>
+                        <p>receberProperty.SetValue(receber, enviarProperty.GetValue(enviar));</p>
+                        <p>break;</p>
+                        <p>}</p>
+                        <p>}</p>
+                        <p>}</p>
+                        <p>}</p>
+                        <h3>Remover caractere se for o último</h3>
+                        <p>string link = ConfigurationManager.AppSettings["conexaoServidor"];</p>
+                        <pre>link = link.TrimEnd('/');</pre>
+                        <h3>Rodar processo assíncrono dentro de evento void</h3>
+                        <p>Arquivo: F:\DevOps\SmartBI\Asv.SmartBI.Module\Module.cs</p>
+                        <p>private void ObjectSpace_ObjectsGetting(Object sender, ObjectsGettingEventArgs e)</p>
+                        <p>{</p>
+                        <p>if (e.ObjectType == typeof(TicketsGlpi))</p>
+                        <p>{</p>
+                        <p>BindingList<ticketsglpi> objects = new BindingList<ticketsglpi>();</ticketsglpi>
+                                </ticketsglpi>
+                        </p>
+                        <p>var tickets = System.Threading.Tasks.Task.Run(</p>
+                        <p>async () =&gt; await ProcessosGlpi.GetTicketsAtivosAsync()).Result;</p>
+                        <p>tickets.ForEach(ticket =&gt; {</p>
+                        <p>objects.Add(ticket);</p>
+                        <p>});</p>
+                        <p>e.Objects = objects;</p>
+                        <p>}</p>
+                        <pre>}</pre>
+                        <h3>Validar parâmetros com Contract.Requires</h3>
+                        <p>public ListResponse<order> GetOrderList(int page = 1, int pageSize = 100)</order>
+                        </p>
+                        <p>{</p>
+                        <p>Contract.Requires(page &gt; 0);</p>
+                        <pre>Contract.Requires(pageSize &lt;= 100);</pre>
+                        <pre>}</pre>
+                        <h3>Copiar arquivo para diretório de saída</h3>
+                        <p>Via comando:</p>
+                        <p>copy "$(ProjectDir)Processos\EmailLote\LayoutBoletos\Boleto.html" "$(ProjectDir)$(OutDir)\"
+                        </p>
+                        <p>copy "$(ProjectDir)Processos\EmailLote\LayoutBoletos\BoletoSemPix.html"
+                                "$(ProjectDir)$(OutDir)\"</p>
+                        <p>copy "$(ProjectDir)Processos\EmailLote\LayoutBoletos\Boleto_CSS.css"
+                                "$(ProjectDir)$(OutDir)\"</p>
+                        <p>copy "$(ProjectDir)Processos\EmailLote\LayoutBoletos\EmailTCLH.html"
+                                "$(ProjectDir)$(OutDir)\"</p>
+                        <h3>Classe Sql</h3>
+                        <h4>Filtro com WhereAndIn</h4>
+                        <p>Filtrando um List<string>:</string>
+                        </p>
+                        <p>asv.WhereAndIn("PedIte.CodProduto", "'" + string.Join("','",_lstCodProdutos) + "'") ;</p>
+                        <p>Filtrando um List<int>:</int>
+                        </p>
+                        <p>asv.WhereAndIn("Pedido.CodFilialFatur", string.Join(",", _filiais));</p>
+                        <h2>Enums</h2>
+                        <h3>Pegar descrição de um enum</h3>
+                        <p>public static string BuscaDescNumeracao(Numeracao_CodNumero pCodNumero)</p>
+                        <p>{</p>
+                        <p>EnumDescriptor enumDescriptor = new EnumDescriptor(typeof(Numeracao_CodNumero));</p>
+                        <p>try</p>
+                        <p>{</p>
+                        <p>return enumDescriptor.GetCaption(pCodNumero);</p>
+                        <p>}</p>
+                        <p>catch (Exception)</p>
+                        <p>{</p>
+                        <p>return "DESCRIÇÃO DESCONHECIDA";</p>
+                        <p>}</p>
+                        <p>}</p>
+                        <h3>Retornar descrição de um enum</h3>
+                        <p>namespace Asv.Dicionario.Solution.PersistentObject.Sistema</p>
+                        <p>{</p>
+                        <p>public partial class PlanoConta</p>
+                        <p>{</p>
+                        <p>[XafDisplayName("Grupo no DRE")]</p>
+                        <p>public string DescMetDre</p>
+                        <p>{</p>
+                        <p>get</p>
+                        <p>{</p>
+                        <p>return MetDre.GetEnumDisplayName();</p>
+                        <p>}</p>
+                        <p>}</p>
+                        <p>public override string ToString(string format, IFormatProvider fp)</p>
+                        <p>{</p>
+                        <p>return DescConta;</p>
+                        <p>}</p>
+                        <p>}</p>
+                        <p>}</p>
+                        <h3>Pegando valor string de um enum:</h3>
+                        <p>asv.WhereAnd("Pedido.DestinoMer", DestinoPedido.Orcamento.GetAtributoDoTipo
+                                <legacycharvalueattribute>().valor,
+                                        "&lt;&gt;");</legacycharvalueattribute>
+                        </p>
+                        <h2>Exceptions</h2>
+                        <h3>Capturando erro da exception</h3>
+                        <p>logsRetorno.AddLog(NivelLog.Erro, $"Erro: {ex.InnerException?.Message ?? ex.Message}");</p>
+                        <p>throw new UserFriendlyException($"Erro ao tentar integrar pedido, {ex.Message}
+                                {Environment.NewLine} " +</p>
+                        <p>$"{ex.InnerException?.Message} {Environment.NewLine} {ex.StackTrace}");</p>
+                        <h2>Linq e lambda</h2>
+                        <h3>Método inline</h3>
+                        <h2>formatações</h2>
+                        <h3>Inteiro</h3>
+                        <h2>dev expres</h2>
+                        <h3>Criteria Operator</h3>
+                        <h4>Exemplo 1</h4>
+                        <p>CriteriaOperator mCOConFil;</p>
+                        <p>mCOConFil = new BinaryOperator("AnoMes", pAnoMesInicio.ToString("yyyy-MM-dd"));</p>
+                        <p>mCOConFil = CriteriaOperator.And(mCOConFil, new BinaryOperator("FilialId", insFilial.Id));
+                        </p>
+                        <p>insConFil = mObjectSpace.FindObject<confil>(mCOConFil);</confil>
+                        </p>
+                        <h4>Exemplo 2</h4>
+                        <h4>Sub Select</h4>
+                        <h3>Úteis</h3>
+                        <h4>Pegando colaborador logado</h4>
+                        <p>Colaborador.TryGetCurrentUser(out Colaborador colaboradorLogado);</p>
+                        <p>int id = colaboradorLogado?.IdFilial ?? 1;</p>
+                        <p>FilialParam filial = os.FindObject<filialparam>(x =&gt; x.FilialId.Id == id);</filialparam>
+                        </p>
+                        <p>var mColaborador = (Colaborador)SecuritySystem.CurrentUser;</p>
+                        <p>CriteriaOperator mFiltro;</p>
+                        <p>mFiltro = new BinaryOperator("CodEmpresa", mColaborador.Globais.FilialId.CodEmpresa);</p>
+                        <p>mFiltro = CriteriaOperator.And(mFiltro, new BinaryOperator("CodFilial",
+                                mColaborador.Globais.FilialId.CodFilial));</p>
+                        <p>mFiltro = CriteriaOperator.And(mFiltro, new BinaryOperator("Estado", Estado));</p>
+                        <p>return Session.FindObject<federacao>(mFiltro);</federacao>
+                        </p>
+                        <h4>Visualizar sql executado pelo xaf</h4>
+                        <h4>Gravar sqls executados pelo xaf</h4>
+                        <h4>Mensagens</h4>
+                        <h4>Clonar objetos</h4>
+                        <h4>Não permitir digitar e abrir teclado na Lookup</h4>
+                        <p>public class LookupController : ViewController<detailview></detailview>
+                        </p>
+                        <p>{</p>
+                        <p>protected override void OnActivated()</p>
+                        <p>{</p>
+                        <p>base.OnActivated();</p>
+                        <p>View.CustomizeViewItemControl<aspxlookuppropertyeditor>(this, editor =&gt; {
+                                </aspxlookuppropertyeditor>
+                        </p>
+                        <p>if (editor.DropDownEdit != null)</p>
+                        <p>{</p>
+                        <p>editor.DropDownEdit.DropDown.AllowUserInput = false;</p>
+                        <p>}</p>
+                        <p>});</p>
+                        <p>View.CustomizeViewItemControl<aspxgridlookuppropertyeditor>(this, editor =&gt; {
+                                </aspxgridlookuppropertyeditor>
+                        </p>
+                        <p>if (editor.Editor != null)</p>
+                        <p>{</p>
+                        <p>editor.Editor.AllowUserInput = false;</p>
+                        <p>}</p>
+                        <p>});</p>
+                        <p>}</p>
+                        <pre>}</pre>
+                        <h4>Atualizar banco de dados</h4>
+                        <p>Colocar estes comandos em um arquivo .bat</p>
+                        <p>chcp 65001</p>
+                        <p>DBUpdater.v22.1.exe -silent Asv.ManifestoNFe.Win.exe.config -forceupdate</p>
+                        <h3>Ações Detail View</h3>
+                        <h4>Desabilitando controles da tela</h4>
+                        <h4>Como remover ou ocultar (desativar, desativar) um botão (Ação) da barra de ferramentas</h4>
+                        <h4>Escondendo botão para editar na web</h4>
+                        <p>Chamado no OnActivated, tem que ser feito somente no módulo web;</p>
+                        <p>Este código esconde o botão de editar, porém tentar incluir um registro nos campos ficam
+                                desabilitados (módulo
+                                padrão).</p>
+                        <h4>Escondendo botão editar do ListView (módulo: Web)</h4>
+                        <p>Caminho:
+                                D:\TFS_ASV\SmartSolution\Asv.Modulo\Asv.Modulo.Sistema.Web\Controllers\Arquivo\ArquivoController.cs
+                        </p>
+                        <h4>Escondendo uma ação</h4>
+                        <h4>Escondendo actions de acordo com a situação do pedido e tela que chamou</h4>
+                        <p>D:\TFS_ASV\SmartSolution\Asv.Modulo\Asv.Modulo.Sistema\Controllers\Arquivo\ArquivoAnexo._Controller.cs
+                        </p>
+                        <h4>Executar código após click botão Save</h4>
+                        <p>Implementar o método SaveAndNewAction_Executing, caso tenha a necessidade de verificar se é
+                                um objeto novo:</p>
+                        <h3>Popup</h3>
+                        <h4>Mostrando mensagem de confirmação de exclusão de obj nonPersistent</h4>
+                        <p>D:\TFS_ASV\SmartSolution\Asv.Modulo\Asv.Modulo.Sistema\Controllers\Arquivo\ArquivoController.Remove.cs
+                        </p>
+                        <h3>Linq</h3>
+                        <h4>Filtrando e excluindo registros de uma tabela</h4>
+                        <h4>Xpo</h4>
+                        <p>XPQuery<caddoc> notaQuery = new XPQuery<caddoc>(objectSpace.GetSession());</caddoc>
+                                </caddoc>
+                        </p>
+                        <p>var nota = notaQuery.Where(x =&gt; x.NrNota == int.Parse(nrNota))</p>
+                        <p>.OrderByDescending(x =&gt; x.DataMovto)</p>
+                        <p>.FirstOrDefault();</p>
+                        <h4>Group By com Sum em mais de uma coluna</h4>
+                        <h3>ListView</h3>
+                        <h4>Propriedade DataAcessMode</h4>
+                        <p>Client: carrega todos os registros do branco de dados, recomendado para quando não tem muitos
+                                registros o grupo
+                                de classificação e filtragem podem travar o aplicativo;</p>
+                        <p>Server, ServerView: ele carregará apenas uma parte dos registros e conforme rolarmos ou
+                                paginamos ele
+                                solicitará mais dados sob demanda, conforme vai rodando para baixo ele vai carregando
+                                novos dados e travando a
+                                tela até ser carregado;</p>
+                        <p>InstantFeedback: funciona de maneira semelhante ao Server mas a interface não fica travando
+                                fica carregando
+                                dados em thread em segundo plano, a interface permanece responsiva;</p>
+                        <p>DataView: ideal para quando se tem uma estrutura complicada com muitas propriedades de
+                                referencia</p>
+                        <h3>Object Space</h3>
+                        <h4>Criando objeto</h4>
+                        <h4>Para obter um objeto de um contexto de dados em outro contexto de dados, execute as etapas
+                                abaixo:</h4>
+                        <p>Chame o método Session.GetKeyValue para obter o ID do objeto.</p>
+                        <p>Use o método GetObjectByKey ou FindObject para obter um único objeto salvo de um banco de
+                                dados.</p>
+                        <h2>IIS</h2>
+                        <h3>Configurar ISS para acessar pasta externa</h3>
+                        <p>Para executar um exe em outra pasta, foi necessário informar um usuário de domínio no pool da
+                                aplicação</p>
+                        <h2>Geração automática</h2>
+                        <h3>Gerar classe a partir do xsd</h3>
+                        <p>C:\Windows\system32&gt;cd C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8
+                                Tools</p>
+                        <p>C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools&gt;xsd
+                                D:\Asv\Banrisul\Schemas\Bocjwsen_RegistrarTitulo.xsd /c /l:CS /o:D:\Asv\Banrisul\Classes
+                        </p>
+                        <p>Fonte:</p>
+                        <h2>Visual Studio</h2>
+                        <h3>Controlar item ativo no Gerenciador de Soluções</h3>
+                        <h2>windows services</h2>
+                        <h3>Acessar pastas da rede</h3>
+                        <p>Net use =&gt; para pegar o caminho completo da unidade mapeada;</p>
+                        <p>Nslookup + ip =&gt; para pegar o nome do servidor;</p>
+                        <p>Feito isso é só pegar o nome completo iniciado pelo nome do servidor porque se colocar o ip
+                                pode ser que venha
+                                mudar e dar um problema posteriormente.</p>
+                        <p>Exemplo: \\Vsrv-ad102-rif.riffel.com.br\usuarios\Logística\comprovante_nfes</p>
+                        <h1>asv</h1>
+                        <h2>senhas</h2>
+                        <h3>Servidor 172.20.1.100</h3>
+                        <p>desenvolvimento</p>
+                        <p>@$V.2024</p>
+                        <h3>Canal Youtube</h3>
+                        <p>Dmk32@dad</p>
+                        <h3>Ambiental</h3>
+                        <h4>Servidor com as APIs</h4>
+                        <p>172.16.11.3</p>
+                        <p>asv.herbert@ambiental.sc.local</p>
+                        <p>qt6)6xJ7)K5I</p>
+                        <h4>TeamViwer</h4>
+                        <p>Id: 1008341389</p>
+                        <p>Senha: ambiental</p>
+                        <p>Senha da máq: @cpd@1984</p>
+                        <h3>GoFind</h3>
+                        <p>Usuário: eventos.scheduler</p>
+                        <p>Senha: Dmk32@dad</p>
+                        <h3>DevExpress</h3>
+                        <p>AsvBlumenau_04</p>
+                        <h3>Remote Desktop</h3>
+                        <p>Dmk32@dad</p>
+                        <p>Para configurar: clicar em file/Data Sources/botão +</p>
+                        <h3>Tron</h3>
+                        <p>tron@asv.com.br</p>
+                        <p>Gro58fdg@</p>
+                        <h3>Team Viewer senha padrão</h3>
+                        <p>@$V.admin0802</p>
+                        <h3>Clientes</h3>
+                        <h4>Riffel – Wts</h4>
+                        <p>177.43.49.76:3316</p>
+                        <p>asvsis</p>
+                        <p>@$V.c0ns2020</p>
+                        <h3>Forven Web</h3>
+                        <h4>Construmaq</h4>
+                        <p>Usuario: Eder</p>
+                        <p>Senha: 120312</p>
+                        <h4>Brustec</h4>
+                        <p>Usuario: ronaldo.santos</p>
+                        <p>Senha: 123</p>
+                        <h3>Versátil – Solution</h3>
+                        <p>@$VCon</p>
+                        <h3>Servidor Linux</h3>
+                        <p>IP: 93.127.210.14:3306</p>
+                        <p>Usuario: root</p>
+                        <p>Senha: @$V.admin0802</p>
+                        <h3>Ambiental</h3>
+                        <p>Usuário: asv.edimar</p>
+                        <p>Senha: ZC1}3e/703AK</p>
+                        <h2>Dicas</h2>
+                        <h3>Faturar mais de 12 parcelas</h3>
+                        <p>A Sul Brasil teve está necessidade, foi colocado no PedPagto e no ConfirmaProdutosFaturar foi
+                                alterado os
+                                campos com dimensões para 100, e na procedure LeParcelamento onde está populando os
+                                campos de dimensões foi
+                                necessário atribuir o contador para o sufixo;</p>
+                        <h1>solution</h1>
+                        <h2>Módulo de frete</h2>
+                        <h3>Tabelas</h3>
+                        <p>Conhecimento(COF)</p>
+                        <p>ConhecimentoNota(CFN)</p>
+                        <h2>faturamento</h2>
+                        <h3>Sul Brasil</h3>
+                        <h4>ORDEM DE FATURAMENTO</h4>
+                        <p>Liberar a leitura na OF (independente do parametro) (OK)</p>
+                        <h4>FATURAMENTO</h4>
+                        <p>Para os pedidos COM ALGUMA BIPAGEM na OF, o sistema movimentar estoque na emissão da nota
+                                (processo
+                                tradicional).  (OK)</p>
+                        <p>Para os pedidos SEM NENHUMA BIPAGEM na OF, a movimentação de estoque ocorrer na tela de
+                                conferência, onde o
+                                operador faria a leitura de todos os itens.</p>
+                        <p>indicar se conferencia da nota está pendente</p>
+                        <h4>CONFERENCIA DE NOTA (OK)</h4>
+                        <p>ao digitar nota, se pendente de conferência deve permitir leitura</p>
+                        <h4>Venda</h4>
+                        <h4>1. Com bipagem movimenta estoque. Se tiver alguma variante sortida na OF não deixa
+                                prosseguir (a nf não fica
+                                pendente);</h4>
+                        <h4>2. Sem bipagem não movimenta estoque e marca nf como pendente (CadDoc.SeOperacaoFatur='S');
+                        </h4>
+                        <h4>Não Venda (Operacao.TipoVenda &lt;&gt; 1,2,3,4)</h4>
+                        <p>1. Movimenta estoque normal, porém não irá movimentar estoque da variante sortida;</p>
+                        <p>* Se tiver variante sortida deve marcar nf como pendente;</p>
+                        <h4>Tela de Conferencia:</h4>
+                        <h4>Venda</h4>
+                        <h4>1. NF Com bipagem na OF não está pendente, neste caso não é permitido selecionar a nf;</h4>
+                        <h4>2. NF sem bipagem na OF terá que bipar tudo, pois não foi movimentado estoque de nada;</h4>
+                        <h4>Com isso não faz sentido buscar da aba manual para interpretar como lida;</h4>
+                        <p>Não Venda (Operacao.TipoVenda &lt;&gt; 1,2,3,4):</p>
+                        <p>Fica pendente apendas os registros de variante sortida. Ao serem bipados o estoque será
+                                movimentado;</p>
+                        <h4>Verificar se tem necessidade de alterar a tela de consulta de etiquetas registradas;</h4>
+                        <h4>Lógica da tela de conferencia mudou, agora a mesma serve para conferir somente aquilo que
+                                não movimentou
+                                estoque teste;</h4>
+                        <h3>Lógica sobre a definição do CST entre Produto e Operação</h3>
+                        <p>O sistema permite a definição da tributação tanto no Produto como na Operação.</p>
+                        <p>Em regra geral, se o CST da Operação estiver configurado para não tributar (isento ou outros)
+                                então será
+                                utilizado o CST da Operação.</p>
+                        <h3>Requisitos para calcular Difal</h3>
+                        <p>* Operacao.SeCalculaDifal = 1;</p>
+                        <p>* tem que estar dentro da data de inicio do difal informado na tela de parametros;</p>
+                        <p>* consumidor final;</p>
+                        <p>* fora do estado</p>
+                        <p>* o estado nao pode ser igual a estrangeiro;</p>
+                        <p>- certifique-se que tenha valor faturado;</p>
+                        <p>- verificar se o campo "Tipo de Item" esteja marcado como valor informado;</p>
+                        <h2>Toalhas olinda</h2>
+                        <h3>Arquivo logo etiqueta de volumes</h3>
+                        <p>Existe um arquivo específico para a logo da etiqueta que deve ser informado na tela de
+                                parâmetros.</p>
+                        <p>Arquivos para edição da etiqueta no Bartender: X:\Sistemas\_SSolutionSql\Util\Toalhas Olinda
+                        </p>
+                        <p>Foi necessário ser feito dessa forma pois alguns caracteres da logo não são reconhecidos pelo
+                                Clarion.</p>
+                        <p>Ao editar essa etiqueta no é necessário se atentar pois o arquivo da logo é concatenado junto
+                                à etiqueta gerada
+                                pelo processo.</p>
+                        <p>Ao abrir o arquivo do logo, não abrir e salvar pelo notepad, alguns caracteres são perdidos
+                                na hora de salvar,
+                                utilizar o notepad++.</p>
+                        <h2>política comercial</h2>
+                        <h3>Definição da aprovação especial conforme o roteiro</h3>
+                        <p>Tela contendo a parametrização do roteiro:</p>
+                        <p>No pedido tem o campo CodRoteiro ele é definido dentro da rotina que consiste a política
+                                comercial, na regra da
+                                política irá ter a informação do tipo de definição do roteiro de aprovação, exemplo:</p>
+                        <p>Nesta regra se a faixa de valor for até 10% o pedido será bloqueado e a definição de quem irá
+                                aprovar este
+                                pedido (roteiro de aprovação) será pela parametrização Grupo de clientes/Estado
+                                (cadastro na tela de parâmetros
+                                da imagem anterior), ou seja, primeiro o sistema irá verificar qual é o grupo do cliente
+                                e se encontra um
+                                roteiro de aprovação para aquele grupo, caso encontre é usado este roteiro caso
+                                contrário o sistema vai tentar
+                                definir pelo estado do cliente.</p>
+                        <p>Se a faixa for superior a 10% será definido para o roteiro da diretoria, pois está
+                                configurado a opção
+                                “informado”.</p>
+                        <h2>NFe</h2>
+                        <h3>Última Nota Técnica verificada</h3>
+                        <h2>Força de vendas web</h2>
+                        <h3>Construmaq</h3>
+                        <p>Url:</p>
+                        <p>eder</p>
+                        <p>120312</p>
+                        <h2>Manifesto nfe</h2>
+                        <h3>Desacordo CTe</h3>
+                        <h1>Mysql</h1>
+                        <h2>Variáveis locais importantes</h2>
+                        <p>No arquivo My.ini</p>
+                        <p>innodb_thread_concurrency=10</p>
+                        <p>max_allowed_packet = 512M</p>
+                        <p>lower_case_table_names = 0</p>
+                        <p>innodb_buffer_pool_size=512M</p>
+                        <p>max_allowed_packet=1G</p>
+                        <p>max_connections=1000</p>
+                        <p>innodb_log_buffer_size=128M</p>
+                        <p>innodb_buffer_pool_size=3G</p>
+                        <p>innodb_log_file_size=512M</p>
+                        <h2>Dicas</h2>
+                        <h3>Erro: Illegal mix of collations (latin1_swedish_ci, IMPLICIT) and (utf8_general_ci,
+                                COERCIBLE);</h3>
+                        <p>Quando aparecer este erro utilizar o comando:</p>
+                        <p>set collation_connection=latin1_swedish_ci;</p>
+                        <h3>Transaction fica travada no mysql</h3>
+                        <p>* Executar o comando: SHOW ENGINE INNODB STATUS;</p>
+                        <p>- Copiar o texto da coluna status e procurar pela palavra active</p>
+                        <p>Exemplo:</p>
+                        <p>---TRANSACTION 4325705, ACTIVE 153 sec</p>
+                        <p>7 lock struct(s), heap size 1136, 4 row lock(s), undo log entries 1</p>
+                        <p>MySQL thread id 255, OS thread handle 4744, query id 128115 10.10.10.3 root</p>
+                        <p>Trx read view will not see trx with id &gt;= 4325705, sees &lt; 4325696</p>
+                        <p>- localizar o id da thread;</p>
+                        <p>- pode ser executado o comando: SHOW FULL PROCESSLIST para ver se o id está ativo;</p>
+                        <p>- para fechar a thread executar o comando: kill idThread;</p>
+                        <h3>Ordenar campo varchar</h3>
+                        <p>SELECT * FROM regiao ORDER BY CAST(CodRegiao AS SIGNED);</p>
+                        <h3>Filtrando dívidas vencidas a mais de 5 anos</h3>
+                        <h3>Tabelas bloqueadas</h3>
+                        <p>show open tables where in_use&gt;0;</p>
+                        <h3>Selecionando colunas com determinado tipo de dado</h3>
+                        <p>SELECT *</p>
+                        <p>FROM information_schema.COLUMNS</p>
+                        <p>WHERE TABLE_SCHEMA ="cclpbc"</p>
+                        <p>AND DATA_TYPE="text";</p>
+                        <h3>Gravar log</h3>
+                        <p>SET GLOBAL general_log = 1;</p>
+                        <p>SET GLOBAL log_output = 'table';</p>
+                        <pre>SET GLOBAL GENERAL_LOG = 0;
+SELECT * FROM mysql.`general_log` ORDER BY event_time DESC LIMIT 100;
+TRUNCATE mysql.`general_log`;</pre>
+                        <h3>Consultar e setar sqlmode</h3>
+                        <p>SELECT</p>
+                        <p>@@SESSION.sql_mode AS session_sql_mode,</p>
+                        <p>@@GLOBAL.sql_mode AS global_sql_mode;</p>
+                        <p>SET @@SQL_MODE = CONCAT(@@SQL_MODE, ',EMPTY_STRING_IS_NULL');</p>
+                        <p>SET SESSION sql_mode = '';</p>
+                        <p>SET @@GLOBAL.sql_mode = '';</p>
+                        <p>Sqlmode ambiental:</p>
+                        <p>STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+                        </p>
+                        <h2>Sql importantes</h2>
+                        <h3>Pegando o registro mais recente de um agrupamento</h3>
+                        <pre>SELECT ia.*</pre>
+                        <pre>FROM Imovel i</pre>
+                        <pre>LEFT JOIN ImovelAgencia ia ON ia.CodImovel = i.CodImovel</pre>
+                        <pre>WHERE ia.NrLancto = (SELECT a.NrLancto FROM imovelagencia a WHERE a.CodImovel=i.CodImovel ORDER BY a.DataRegistro DESC,a.HoraRegistro DESC LIMIT 1)</pre>
+                        <pre>AND ia.CodBanco=33;</pre>
+                        <p>O sql acima pega somente os registros destacados abaixo:</p>
+                        <h3>Concatenando registros de uma subquery</h3>
+                        <pre>SELECT GROUP_CONCAT(NrTelefone SEPARATOR '; ') FROM ClienteFone WHERE CodCliente = 23 AND ClienteFone.TipoFone = 'C';</pre>
+                        <h3>Consultando colunas das tabelas</h3>
+                        <h3>Update com join</h3>
+                        <h3>Insert com select</h3>
+                        <h2>Erros</h2>
+                        <h3>Erro ao incluir coluna de data no Clarion</h3>
+                        <p>Este seria o problema:</p>
+                        <h1>PowerDesigner 16.5</h1>
+                        <h2>instalação</h2>
+                        <p>Instalar a versão trial:</p>
+                        <p>Depois de instalado deve copiar estes dois arquivos para a pasta de instalação:</p>
+                        <p>Arquivo: mysql50_asv.xdb</p>
+                        <p>Copiar para: C:\Program Files (x86)\SAP\PowerDesigner 16\Resource Files\DBMS</p>
+                        <p>Arquivo: pdflm16.dll</p>
+                        <p>Copiar para: C:\Program Files (x86)\SAP\PowerDesigner 16</p>
+                        <h1>windows</h1>
+                        <h2>diretórios</h2>
+                        <h3>Inicialização dos programas</h3>
+                        <p>%AppData%\Microsoft\Windows\Start Menu\Programs\Startup</p>
+                        <h2>cmd</h2>
+                        <h3>Quando um programa não aparece na lista de processos</h3>
+                        <h4>Listar programas</h4>
+                        <p>tasklist.exe</p>
+                        <h4>Forçar fechamento do programa</h4>
+                        <p>taskkill /PID 42800 /F</p>
+                        <h1>Git – github</h1>
+                        <h2>tutorial de utilização</h2>
+                        <h3>Criando diretório remoto</h3>
+                        <p>Primeiro deve criar um repositório remoto no git. Com o repositório criado dá para usar o VS
+                                Code para linkar o
+                                projeto com o repositório ou diretamente o terminal do git.</p>
+                        <p>Essas são as recomendações do site do Git:</p>
+                        <p>Vamos copiar o primeiro código para executar no terminar:</p>
+                        <pre>git init</pre>
+                        <pre>git add README.md</pre>
+                        <pre>git commit -m "first commit"</pre>
+                        <pre>git branch -M main</pre>
+                        <pre>git remote add origin https://github.com/EddyLopes/numero-secreto.git</pre>
+                        <pre>git push -u origin main</pre>
+                        <h3>Criando repositório local</h3>
+                        <p>Antes de executar qualquer comando no terminal é necessário identificar se o git está
+                                instalado na máquina
+                                local, caso não esteja tem que pesquisar no google baixar e instalar. Após instalado é
+                                bom fechar o Vs Code e
+                                abrir novamente.</p>
+                        <p><strong>Abra o terminal e rode o comando git init para iniciar. Caso apresente erros dá uma
+                                        conferida nas
+                                        variáveis de ambientes do Windows para identificar se na instalação foi incluído
+                                        o diretório de instalação do
+                                        git.</strong></p>
+                        <p><strong>Agora é hora de adicionar os seus arquivos ao repositório local, tem a opção de
+                                        incluir arquivo por
+                                        arquivo ou adicionar todos de uma vez através do comando: git add . e na
+                                        sequência rodar o git commit -m
+                                        “projeto inicial” o commit é necessário para confirmar a gravação no repositório
+                                        local.</strong></p>
+                        <p>Conforme imagem acima não foi apresentado nenhum erro, os arquivos foram adicionados ao
+                                repositório local com
+                                êxito. Porém em máquina em que o git acabou de ser instalado, ao rodar este comando irá
+                                apresentar um erro de
+                                confirmação da identidade do autor do projeto.</p>
+                        <p>Repare no texto selecionado acima que o git já sugere uma solução, pois o git precisa saber
+                                qual o email e nome
+                                da sua conta remota.</p>
+                        <p>Agora é hora de linkar o repositório local com o repositório remoto através do seguinte
+                                comando:</p>
+                        <p><strong>git remote add origin git@github.com:EddyLopes/numero-secreto.git</strong></p>
+                        <p>Repare que o comando utilizado foi diferente do sugerido na imagem que apresenta os comandos
+                                sugeridos pelo
+                                git, essa diferença foi pelo fato da utilização do protocolo ssh que é o mais indicado
+                                para estes casos.</p>
+                        <p><strong>Na sequência rodar o comando git push -u origin master para subir as alterações
+                                        aplicadas no
+                                        repositório local para o repositório do servidor. Como foi utilizado o protocolo
+                                        ssh o terminal apresentará um
+                                        erro, pois necessita criar uma chave ssh na maq e depois informar essa chave
+                                        para o git. Para criar essa chave
+                                        rodar o seguinte comando</strong></p>
+                        <p><strong>ssh-keygen -t ed25519 -C</strong></p>
+                        <p>Depois de rodar o comando o terminal faz algumas perguntas se deseja criar senha etc. é só
+                                confirmar com enter
+                                até o final e pronto a chave ssh foi criada e agora é só acessar o seguinte diretório:
+                        </p>
+                        <p>Informar essa chave nas configuração do git-hub:</p>
+                        <h2>trabalhando com diretórios</h2>
+                        <p>mkdir workspace =&gt; cria pasta;</p>
+                        <p>echo hello &gt; hello.txt =&gt; criar aquivo;</p>
+                        <p>del workspace =&gt; excluir todos os arquivos de dentro de uma pasta;</p>
+                        <p>rmdir workspace /S /Q =&gt; remover diretório;</p>
+                        <p>mv strogonoff.md ./receitas/</p>
+                        <h2>comandos do git</h2>
+                        <p>git init =&gt; inicializa uma pasta no git;</p>
+                        <p>git add * =&gt; adiciona todos os arquivos da pasta ao git;</p>
+                        <p>git add index.html js/ =&gt; adiciona estes aquivos ao git;</p>
+                        <p>git commit -m “texto intuitivo” =&gt; comita as alterações feitas;</p>
+                        <p>git status =&gt; verificar os status do arquivo;</p>
+                        <p>git config --lst =&gt; lista s configurações do github;</p>
+                        <p>git config --global--unset user.nickname =&gt; resetando a configuração do nome no github;
+                        </p>
+                        <p>git config --global user.email “” =&gt; resetando a configuração do e- mail do github;</p>
+                        <p>git config user.name “Edimar Lopes”;</p>
+                        <p>git config --global user.nickname;</p>
+                        <p>git remote add origin =&gt; adiciona diretório remoto para possibilitar fazer o push;</p>
+                        <p>git remote -v =&gt; lista os repositórios remotos;</p>
+                        <p>git remote set-url origin =&gt; Isso atualizará a URL do repositório remoto "origin" para a
+                                nova URL
+                                especificada.</p>
+                        <p>git remote rename origin novo-origin =&gt; Isso renomeará o repositório remoto de "origin"
+                                para "novo-origin".
+                        </p>
+                        <p>git push origin master =&gt; envia os commits para o repositório remoto;</p>
+                        <p>git pull origin master =&gt; puxa o que tem no servidor remoto para o local;</p>
+                        <p>git clone =&gt; copiar um repositório do git, dentro deste repositório copiado vai ter uma
+                                pasta git contendo o
+                                repositório para onde ele está sendo apontado;</p>
+                        <p>ls -a =&gt; mostra diretórios ocultos;</p>
+                        <p>ls =&gt; mostra diretórios;</p>
+                        <p>git log =&gt; mostra o que já foi comitado;</p>
+                        <h2>Exemplo de conflito entre local x servidor:</h2>
+                        <p>Ao dar o commit irá aparecer a seguinte mensagem de erro:</p>
+                        <p>Na sequencia deve se faz o pull para pegar os códigos do servidor, o git dará seguinte
+                                mensagem avisando sobre
+                                o conflito:</p>
+                        <p>Abrir o arquivo com o conflito e decidir o que deixar e depois comitar.</p>
+                        <h1>html</h1>
+                        <h2>dicas</h2>
+                        <h3>Incluir código base</h3>
+                        <p>No Vs Code digitar um ponto de exclamação “!” e esperar alguns segundos depois e clicar no
+                                ponto de exclamação
+                                que aparecer será gerado o código fonte;</p>
+                        <h1>react native</h1>
+                        <h2>Node Js</h2>
+                        <h3>Instalar Expo</h3>
+                        <h3>Criar um aplicativo</h3>
+                        <p>Deve-se primeiro navegar pelo prompt de comando até a pasta que se deseja salvar o projeto e
+                                em seguida digitar
+                                o comando abaixo:</p>
+                        <h3>Executar o aplicativo</h3>
+                        <h1>investimentos</h1>
+                        <h2>Indicadores financeiros</h2>
+                        <h3>IPCA</h3>
+                        <p>Índice de preços ao consumidor amplo é a famosa inflação, é medido mensalmente pelo IBGE.
+                                Reflete o custo médio
+                                de vida das famílias brasileiras;</p>
+                        <h3>Selic</h3>
+                        <p>Sistema especial de liquidação e custódia, é um sistema no qual o banco central vai coordenar
+                                as operações de
+                                compras e vendas dos títulos do tesouro nacional já a taxa SELIC é uma média ponderada
+                                das operações que ocorrem
+                                dentro do sistema Selic;</p>
+                        <h3>CDI</h3>
+                        <p>Certificado de depósito interbancário, é uma taxa de remuneração que os bancos vão pagar por
+                                fazer empréstimos
+                                entre si;</p>
+                        <p>Influencia alguns rendimentos de renda fixa: CDB, LCI, LCA;</p>
+                        <h2>Tipos de investimentos</h2>
+                        <h3>Tesouro Direto</h3>
+                        <h4>Prefixado</h4>
+                        <p>Conhece exatamente a taxa de remuneração que você vai ter quando você investe;</p>
+                        <h4>IPCA</h4>
+                        <p>Tem uma parte fixa e outra variável a parte variável é indexada ao IPC, é interessante porque
+                                sempre vai pagar
+                                acima da inflação;</p>
+                        <h4>SELIC</h4>
+                        <p>Vai pagar exatamente a taxa Selic, assim que a taxa Selic for mudando ao longo do tempo a
+                                rentabilidade deste
+                                título também vai mudar;</p>
+                        <h4>Indicações</h4>
+                        <p>O tesouro Prefixado e IPCA é indicado para o médio e longo prazo, ideal mante até o
+                                vencimento.</p>
+                        <p>Selic: curto prazo, pode ser usado como reserva de emergência.</p>
+                        <h4>Para consultar os títulos disponíveis para compras</h4>
+                        <p>Acessar o portal do tesouro direto: Tesourodireto.com.br;</p>
+                        <h3>CDB</h3>
+                        <p>Certificado de depósito bancário, são títulos privados emitidos pelos bancos para captação de
+                                recursos.</p>
+                        <h4>Prefixados</h4>
+                        <p>Já conhece a taxa de rentabilidade antes.</p>
+                        <h4>Híbridos</h4>
+                        <p>Parte fixa e parte variável. Ex: 2% + IPC.</p>
+                        <h4>Pós fixados</h4>
+                        <p>Geralmente são atrelados ao indicador CDI. É importante verificar a liquidez antes de
+                                investir. O segundo ponto
+                                a se analisar são as taxas, tem IRPF sobre a rentabilidade e tem IOF (Imposto de
+                                operações financeiras) é
+                                cobrado quando você investe e resgata antes dos 30 dias.</p>
+                        <h3>LCI E LCA’s</h3>
+                        <p>LCI: Letra de crédito imobiliário;</p>
+                        <p>LCA: Letra de crédito do agronegócio;</p>
+                        <p>São similares ao CDBs títulos emitidos pelo banco para captar recursos para essas áreas. A
+                                vantagem é que eles
+                                são isentos de IRPF. A desvantagem é que tem que manter o investimento até o final do
+                                prazo.</p>
+                        <h4>Prefixados</h4>
+                        <h4>Pós fixados</h4>
+                        <p>São indexados há algum indexador econômico, geralmente CDI.</p>
+                        <h3>Ações</h3>
+                        <h4>Day trade</h4>
+                        <p>É quando compra e vende a ação no mesmo dia</p>
+                        <h4>Swing trade</h4>
+                        <p>É quando compra e vende a ação dentro de alguns dias</p>
+                        <h4>Buy and hold</h4>
+                        <p>Quando compra e vende no longo prazo;</p>
+                        <h3>Fundos Imobiliários</h3>
+                        <h4>Fundo de Tijolo</h4>
+                        <p>Investem em imóveis físicos e ganham com o aluguel destes imóveis, hospitais, lajes
+                                coorporativas, instituições
+                                educacionais, Shopping center etc.</p>
+                        <h4>FIIS de Papel (TVM)</h4>
+                        <p>É um FII de papel, que adquiri o direito de receber aluguéis de vários contratos diferentes.
+                        </p>
+                        <h4>FIIS de Desenvolvimento</h4>
+                        <p>São os FIIS que constroem um imóvel para depois vender ou alugar;</p>
+                        <h4>Fundo de rendas</h4>
+                        <p>São fundos que vão investir em letras de renda fixa que são voltados para o setor
+                                imobiliário, exemplo: LCI.
+                        </p>
+                        <h4>Fundos híbridos</h4>
+                        <p>São aqueles que vão ter tanto imóveis físicos como ativos do setor imobiliário.</p>
+                        <p>Obs: tem vantagem sobre as ações que por regra os fundos têm que repartir 95% dos seus
+                                resultados para os seus
+                                cotistas e são menos voláteis que as ações.</p>
+                        <p>Taxas que podem ser cobradas: administração, performance, corretagem que algumas corretoras
+                                cobram quando você
+                                vende a sua cota tem que pagar IRPF, porém os dividendos são isentos.</p>
+                        <p>Riscos: desastres naturais, crise política ou econômica, desocupação dos imóveis (vacância),
+                                inadimplência.</p>
+                        <h3>Fundos de Investimentos</h3>
+                        <p>É uma carteira de ativos ofertados por uma administradora através de cotas. A vantagem seria
+                                ter um gestor com
+                                conhecimento para tomar as decisões por você.</p>
+                        <p>As taxas que incidem: administração, alguns cobram taxa de performance e o seu rendimento vai
+                                incidir IRPF e
+                                IOF (cobrado somente se resgatar em menos de 3 dias).</p>
+                        <p>Consultar na corretora os fundos disponíveis, analisar se o fundo se adequa ao perfil. Eles
+                                não tem a proteção
+                                do fundo garantidor de crédito.</p>
+                        <p>Comprar fundos que tenham no mínimo 3 anos de existência e consultar o histórico de
+                                rendimento destes anos.</p>
+                        <h1>Aplicativo Aprovação Comercial</h1>
+                        <h2>Instalação no cliente</h2>
+                        <p>Foi utilizado o IIS para servir como um proxy reverso para o servidor local da aplicação web.
+                                (localhost:3000)
+                        </p>
+                        <p>Dessa forma, o site a ser acessado será o do IIS e o certificado SSL poderá ser configurado
+                                pelo IIS</p>
+                        <p>Terá dois sites no IIS, a WebApi e o proxy reverso para a porta 3000</p>
+                        <p>Será necessário alterar também o arquivo .env do projeto da aplicação para que corresponda
+                                com os endereços do
+                                IIS.</p>
+                        <p>Ficará desta forma o .env</p>
+                        <p>NEXT_PUBLIC_COMPANY_NAME=Riffel Motos</p>
+                        <p>NEXT_PUBLIC_API_URL=https://aprovacao.riffel.com.br:449</p>
+                        <p>NEXTAUTH_URL=https://aprovacao.riffel.com.br:83</p>
+                        <p>NODE_TLS_REJECT_UNAUTHORIZED=1</p>
+                        <p>Tem que pedir pra infra criar os apontamentos e liberar as portas.</p>
+                        <p>O tem que ser acessível internamente também, pois a aplicação usa pra fazer a autenticação
+                                (dentro da pasta
+                                api, foi utilizado o next-auth pra autenticação), então a infra tem que criar um
+                                apontamento DNS no Active
+                                Directory pra funcionar internamente tbm.</p>
+                        <h3>Instalação do Node e configuração da aplicação web</h3>
+                        <p>Seguindo esse tutorial, instalar o nvm e a versao 16.13.2 do node:
+                                https://docs.microsoft.com/pt-br/windows/dev-environment/javascript/nodejs-on-windows
+                        </p>
+                        <p>Copiar arquivos para o servidor do cliente</p>
+                        <p>Estando dentro da pasta raiz do projeto, rodar o comando no CMD "npm install --force" para
+                                instalar as
+                                dependencias</p>
+                        <p>Instalar o para rodar a aplicação como um serviço</p>
+                        <p>cd C:\ASV\aprovacao-comercial\nssm-2.24\win64 e no CMD “.\nssm install
+                                aprovacao-comercial-app”</p>
+                        <p>Obs: existe um bat responsável pelo build e início da aplicação, este serviço será
+                                responsável por iniciar esse
+                                bat apenas.</p>
+                        <p>Iniciar o serviço aprovacao-comercial-app</p>
+                        <h3>Configuração do IIS</h3>
+                        <p>Instalar estas duas extensões para o IIS</p>
+                        <p>Criar um site e ir em URL Rewrite</p>
+                        <p>Add rule -&gt; reverse proxy</p>
+                        <p>Informar localhost:3000</p>
+                        <h1>chat gpt</h1>
+                        <h2>c#</h2>
+                        <h3>Usuário logado Api</h3>
+                        <p>Pergunta:</p>
+                        <p>Tenho uma api c# gostaria de saber se eu criar uma classe estática o que eu armazenar nela
+                                vale para todos os
+                                usuários que se conectarem a minha api ou é individual para cada usuário?</p>
+                        <p>exemplo:</p>
+                        <p>public static class PageConfiguration</p>
+                        <p>{</p>
+                        <p>public const int DefaultStatusCode = 200;</p>
+                        <p>public const int DefaultPageNumber = 1;</p>
+                        <p>public const int DefaultPageSize = 25;</p>
+                        <p>public static string BackEndUrl { get; set; } = string.Empty;</p>
+                        <p>public static string FrontEndUrl { get; set; } = string.Empty;</p>
+                        <p>}</p>
+                        <p>repare que essa classe tem o UserName. eu tenho um endpoint para autenticação:</p>
+                        <p>public class AuthenticationEndpoint : IEndpoint</p>
+                        <p>{</p>
+                        <p>public static void Map(IEndpointRouteBuilder app)</p>
+                        <p>{</p>
+                        <p>app.MapPost("/login", HandleAsync)</p>
+                        <p>.WithName("Autenticação")</p>
+                        <p>.WithSummary("Efetua o login para utilizar a api")</p>
+                        <p>.WithDescription("Efetua o login para utilizar a api")</p>
+                        <p>.Produces<gettokenresponse?>();</gettokenresponse?>
+                        </p>
+                        <p>}</p>
+                        <p>private static async Task<iresult> HandleAsync(IAuthenticationServices handler,
+                                        GetTokenRequest token)
+                                </iresult>
+                        </p>
+                        <p>{</p>
+                        <p>var result = await handler.GetToken(token);</p>
+                        <p>if (result.TokenType == TokenType.Unauthorized)</p>
+                        <p>{</p>
+                        <p>return TypedResults.Unauthorized();</p>
+                        <p>}</p>
+                        <p>else if (result.TokenType == TokenType.BadRequest)</p>
+                        <p>{</p>
+                        <p>return TypedResults.BadRequest();</p>
+                        <p>}</p>
+                        <p>else</p>
+                        <p>{</p>
+                        <p>PageConfiguration.UserName = token.UserName;</p>
+                        <p>return TypedResults.Ok(result);</p>
+                        <p>}</p>
+                        <p>}</p>
+                        <p>}</p>
+                        <p>Repare que quando um usuário se autentica é executado essa linha: PageConfiguration.UserName
+                                = token.UserName;
+                                sou um pouco leigo com Apis ainda, então imagina que publiquei em um servidor, aí o PC1
+                                se autentica em minha
+                                api como user1 para consumir algum EndPoint, e no mesmo momento o PC2 se autentica com
+                                user2 a minha dúvida é
+                                para cada usuário irei ter uma PageConfiguration diferente?</p>
+                        <p>Resposta:</p>
+                        <p>Não, você não terá uma PageConfiguration diferente para cada usuário. Como sua classe
+                                PageConfiguration é
+                                estática, todas as propriedades dela são compartilhadas entre todas as requisições da
+                                API, independentemente do
+                                usuário.</p>
+                        <p>O que isso significa na prática?</p>
+                        <p>Se o PC1 fizer login como user1, a linha:</p>
+                        <p>PageConfiguration.UserName = token.UserName;</p>
+                        <p>irá definir PageConfiguration.UserName como "user1".</p>
+                        <p><strong>Agora, se o PC2 fizer login como user2 logo depois, essa mesma propriedade será
+                                        sobrescrita:</strong>
+                        </p>
+                        <p>PageConfiguration.UserName = "user2";</p>
+                        <p>Então, todos os usuários verão o último nome de usuário que fez login. Isso significa que o
+                                valor não será
+                                individual para cada usuário, mas sim global para toda a aplicação.</p>
+                        <p><strong>Como resolver esse problema?</strong></p>
+                        <p><strong>Se você precisa armazenar informações individuais por usuário, você deve evitar o uso
+                                        de classes
+                                        estáticas para esses dados e, em vez disso, usar uma abordagem baseada em estado
+                                        por requisição,
+                                        como:</strong></p>
+                        <p><strong>JWT (JSON Web Token): Ao autenticar o usuário, você pode gerar um token JWT contendo
+                                        informações como o
+                                        nome de usuário e enviá-lo no cabeçalho das requisições subsequentes.</strong>
+                        </p>
+                        <p><strong>Contexto da requisição (HttpContext): Você pode armazenar o usuário autenticado no
+                                        contexto da
+                                        requisição atual.</strong></p>
+                        <p><strong>Banco de Dados ou Cache (ex.: Redis): Se for necessário armazenar informações
+                                        temporárias para
+                                        múltiplas requisições, um banco ou cache pode ser uma opção.</strong></p>
+                        <p>Exemplo de como recuperar o nome do usuário autenticado usando JWT no HttpContext:</p>
+                        <p>public class MyService</p>
+                        <p>{</p>
+                        <p>private readonly IHttpContextAccessor _httpContextAccessor;</p>
+                        <p>public MyService(IHttpContextAccessor httpContextAccessor)</p>
+                        <p>{</p>
+                        <p>_httpContextAccessor = httpContextAccessor;</p>
+                        <p>}</p>
+                        <p>public string GetUserName()</p>
+                        <p>{</p>
+                        <p>return _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "Usuário desconhecido";</p>
+                        <p>}</p>
+                        <p>}</p>
+                        <p><strong>Dessa forma, cada usuário que fizer uma requisição terá seu próprio nome armazenado
+                                        de forma
+                                        individual.</strong></p>
+                </section>
+        </main>
+        <script src="menu.js"></script>
+        <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                        // Gerar índice dinâmico
+                        const tocList = document.getElementById("toc-list");
+                        const headers = document.querySelectorAll("main h1, main h2, main h3");
+                        headers.forEach(header => {
+                                if (!header.id) {
+                                        header.id = header.textContent.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+                                }
+                                const li = document.createElement("li");
+                                li.style.marginLeft = header.tagName === "H2" ? "10px" : header.tagName === "H3" ? "20px" : "0";
+                                li.innerHTML = `<a href="#${header.id}">${header.textContent}</a>`;
+                                tocList.appendChild(li);
+                        });
+
+                        // Busca no sumário
+                        const searchBox = document.getElementById("searchBox");
+                        searchBox.addEventListener("input", function () {
+                                const filter = this.value.toLowerCase();
+                                const links = tocList.querySelectorAll("li");
+                                links.forEach(li => {
+                                        const txt = li.textContent.toLowerCase();
+                                        li.style.display = txt.includes(filter) ? "" : "none";
+                                });
+                        });
+                });
+        </script>
+</body>
+
+</html>

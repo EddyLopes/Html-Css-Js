@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <title>Base de Conhecimento</title>
+</head>
+<body>
+    <nav>
+        <h1>Sumário</h1>
+        <div>
+            <ul>
+                <li></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section>
+            <h1>Clarion</h1>
+            <h2>Úteis</h2>
+            <h3>Primeiro e último dia do mês</h3>
+                
+            <pre>
+                <code>
+LOC:DataMovtoInicial = DATE(MONTH(GLO:DataProc),1,YEAR(GLO:DataProc))
+LOC:DataMovtoFinal = (DATE(MONTH(GLO:DataProc) + 1,1,YEAR(GLO:DataProc)) - 1)
+                </code>
+            </pre>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
