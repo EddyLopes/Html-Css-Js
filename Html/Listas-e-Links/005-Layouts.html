@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML - Layouts</title>
+		<style>
+			* {
+			  box-sizing: border-box;
+			}
+
+			body {
+			  font-family: Arial, Helvetica, sans-serif;
+			}
+
+			/* Style the header */
+			header {
+			  background-color: #666;
+			  padding: 30px;
+			  text-align: center;
+			  font-size: 35px;
+			  color: white;
+			}
+
+			/* Create two columns/boxes that floats next to each other */
+			nav {
+			  float: left;
+			  width: 30%;
+			   
+			  background: #ccc;
+			  padding: 20px;
+			}
+
+			/* Style the list inside the menu */
+			nav ul {
+			  list-style-type: none;
+			  padding: 0;
+			}
+
+			article {
+			  float: left;
+			  padding: 20px;
+			  width: 70%;
+			  background-color: #f1f1f1;
+			}
+
+			/* Clear floats after the columns */
+			section::after {
+			  background: #ccc;
+			  content: "";
+			  display: table;
+			  clear: both;
+			}
+
+			/* Style the footer */
+			footer {
+			  background-color: #777;
+			  padding: 10px;
+			  text-align: center;
+			  color: white;
+			}
+
+			/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+			@media (max-width: 600px) {
+			  nav, article {
+			    width: 100%;
+			    height: auto;
+			  }
+			}
+		</style>    
+</head>
+<body>
+    <header>
+        <h2>Título da página</h2>
+    </header>
+    <section>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <article>
+            <h1>Título Artigo</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nulla, deleniti minima incidunt in neque reprehenderit. Cupiditate labore aspernatur, quo harum error beatae, quibusdam nobis, facilis ipsam quas odio quis. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum repellendus nam minus maxime nisi error temporibus in, exercitationem impedit doloremque sit saepe atque reiciendis! Ex beatae commodi distinctio temporibus alias!
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Id vitae nesciunt rerum repudiandae provident! Praesentium nam exercitationem quae maxime placeat, atque esse ipsum odio pariatur accusantium quo suscipit blanditiis tenetur! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nihil quibusdam quia quo est et, id enim similique voluptas hic labore totam, expedita debitis, amet facere sed iure alias tempora. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi blanditiis, dolore nostrum hic aliquam explicabo enim molestiae repellendus architecto itaque molestias minima perspiciatis illum, vel, ullam pariatur ducimus eum distinctio!
+            </p>
+        </article>
+    </section>
+    <footer>
+        <p>Desenvolvido por Edimar Lopes</p>
+    </footer>
+</body>
+</html>
