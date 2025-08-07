@@ -1,0 +1,48 @@
+/* 
+    seletores
+
+    1) classe -> .
+    2) Id -> #
+    3) nativo do html -> p, h1 etc...
+*/
+
+.primeira-classe {
+    background-color: #ccc;
+    font-size: 15px;
+    font-weight: 300px;
+}
+
+#primeiro-id {
+    background-color: aqua;
+    font-size: 15px;
+    font-weight: 300px;
+}
+
+h1 {
+    background-color: aliceblue;
+}
+
+.conteudo {
+    border: 1px solid #456;
+    background-color: #cccc;
+    background-image: url('https://picsum.photos/200/200?random=1');
+    background-repeat: no-repeat;
+    color: red;
+    height: 200px;
+    width: 100%;
+    font-size: 1.5em;
+}
+
+/*
+    medidas relativas: varia conforme o dispositivo que está sendo utilizado;   
+        %
+        vw -> view width
+        vh -> view height
+
+        • mais aplicadas a fontes:
+            em -> utiliza como base no componente pai
+            rem -> utiliza como base o html
+    
+    medidas absolutas: não mudam;
+        px: 
+*/
