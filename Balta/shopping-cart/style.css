@@ -55,10 +55,18 @@ table > thead > tr > th {
     color: #666;
 }
 
+table tbody tr td {
+    padding: 10px 0;
+}
+
+table tbody tr {
+    border-bottom: 3px solid #eee;
+}
+
 .produto {
     display: flex;
     align-items: center;
-    padding-top: 0.5em;
+    margin-top: 0.5em;
 }
 
 .produto > img {
@@ -125,4 +133,64 @@ table > thead > tr > th {
 }
 .remove:hover {
   background: #ddd;
+}
+
+aside .box {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    background: #eee;
+    color: #222;
+}
+
+aside .box header {
+    padding: 15px 20px;
+    font-size: 18px;
+    border-bottom: 1px solid #ccc;
+}
+
+aside .box .details {
+    padding: 20px;
+    font-size: 16px;
+}
+
+aside .box .details > div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+aside .box .details button {
+    color: #ff3a2f;
+    background: transparent;
+    border: 0;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+aside .box footer {
+    padding: 15px 20px;
+    background: #ddd;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+aside > button {
+    border: 0;
+    padding: 15px 0px;
+    color: white;
+    background: #ff3a2f; /* #8625d2 */
+    display: block;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 1em;
+}
+
+aside > button:hover {
+    background: #3bc55b;
 }
