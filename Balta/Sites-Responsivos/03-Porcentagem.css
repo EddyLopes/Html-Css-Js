@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
+html {
+    font-size: 20px; 
+}
+
 body {
     margin: 0;
     font-size: 18px;
@@ -8,28 +12,28 @@ body {
 }
 
 .section-one {
-    /* font-size: 30px; */
+    font-size: 30px;
 }
 
 ul {
-    font-size: 1.5em; /*equivale a 150% do componente pai*/
+    font-size: 1.2rem; /*equivale a 150% do componente pai*/
 }
 
-li {
-    font-size: 2em;
-}
+/* li {
+    font-size: 2rem;
+} */
 
 h1, h2, strong {
     font-weight: 900;
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 2rem;
     margin: 0;
 }
 
 h2 {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     color: #ef5839;
 }
 
@@ -53,6 +57,7 @@ header {
 .section-two {
     background: #8625d2;
     color: #fff;
+    font-size: 1.2rem;
 }
 
 a {

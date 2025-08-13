@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            border: 10px solid #ff508f;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: .25em;
+            height: 600px;
+            
+            display: flex; 
+            /*
+            este código é equivalente a próxima linha
+            flex-direction: column;
+            flex-wrap: wrap;
+            */
+            flex-flow: column wrap;
+            justify-content: flex-start; /*alinhamento horizontal*/
+            align-items: flex-start; /*alinhamento vertical*/
+            /* gap: 1em; */ /*espaçamento entre os itens*/
+        }
+
+        .item {
+            background: #11d15e;
+            margin: .5em;
+            padding: .5em;
+            color: #424656;
+        }
+    </style>
+</head>
+<body>
+    <h1>Entendendo o FlexBox</h1>
+    <div class="container">
+        <div class="item">flex item 1</div>
+        <div class="item">flex item 2</div>
+        <div class="item">flex item 3</div>
+        <div class="item">flex item 4</div>
+        <div class="item">flex item 5</div>
+        <div class="item">flex item 6</div>
+        <div class="item">flex item 7</div>
+        <div class="item">flex item 8</div>
+        <div class="item">flex item 9</div>
+        <div class="item">flex item 10</div>
+        <div class="item">flex item 11</div>
+        <div class="item">flex item 12</div>
+        <div class="item">flex item 13</div>
+        <div class="item">flex item 14</div>
+        <div class="item">flex item 15</div>
+        <div class="item">flex item 16</div>
+    </div>
+</body>
+</html>
