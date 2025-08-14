@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid - Areas</title>
+
+    <style>
+        .grid {
+            display: grid;
+
+            /* grid-template-columns: 200px 200px 200px; */
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-areas:
+                "header header header"
+                "sidebar content content"
+                "footer footer footer";
+        }
+        
+        .grid-item {
+            background: #b823c1;
+            color: white;
+            padding: 1em 2em;
+            border: 2px solid purple;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .header {
+            grid-area: header;
+        }
+
+        .sidebar {
+            grid-area: sidebar;
+        }
+
+        .content {
+            grid-area: content;
+            padding: 3em 2em;
+            background: #ff5670;
+        }
+
+        .footer {
+            grid-area: footer;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="grid">
+        <div class="grid-item header">header</div>
+        <div class="grid-item sidebar">sidebar</div>
+        <div class="grid-item content">content</div>
+        <div class="grid-item footer">footer</div>
+    </div>
+</body>
+
+</html>

@@ -14,7 +14,7 @@
             max-width: 600px;
             margin: 0 auto;
             padding: .25em;
-            height: 600px;
+            height: 200px; 
             
             display: flex; 
             /*
@@ -22,9 +22,9 @@
             flex-direction: column;
             flex-wrap: wrap;
             */
-            flex-flow: column wrap;
+            flex-flow: row wrap;
             justify-content: flex-start; /*alinhamento horizontal*/
-            align-items: flex-start; /*alinhamento vertical*/
+            align-items: center; /*alinhamento vertical*/
             /* gap: 1em; */ /*espaçamento entre os itens*/
         }
 
@@ -34,27 +34,38 @@
             padding: .5em;
             color: #424656;
         }
+
+        .item-1 {
+            /* background: plum; */
+            /* flex-grow: 1;*/  /*aumenta o tamanho do item 1 para preencher o espaço disponível*/
+            /* flex-shrink: 1; */ /*diminui o tamanho do item 1 para caber na tela*/
+            align-self: stretch; /*alinha o item 1 no centro verticalmente*/
+        }
+  /*       .item-2 {
+            background: lightblue;
+            flex-grow: 1;
+        } */
+        
+        .item-3 {
+/*             background: lightgreen;
+            flex-grow: 1; */
+            align-self: flex-end;
+        }
+
+        .base {
+            /*posso utilizar: auto (padrão), 1, 2 etc...*/
+            /* flex-basis: 50%; */ /*define a largura base do item*/ /*como se setasse um min-width*/
+        }
     </style>
 </head>
 <body>
     <h1>Entendendo o FlexBox</h1>
     <div class="container">
-        <div class="item">flex item 1</div>
-        <div class="item">flex item 2</div>
-        <div class="item">flex item 3</div>
-        <div class="item">flex item 4</div>
-        <div class="item">flex item 5</div>
-        <div class="item">flex item 6</div>
-        <div class="item">flex item 7</div>
-        <div class="item">flex item 8</div>
-        <div class="item">flex item 9</div>
-        <div class="item">flex item 10</div>
-        <div class="item">flex item 11</div>
-        <div class="item">flex item 12</div>
-        <div class="item">flex item 13</div>
-        <div class="item">flex item 14</div>
-        <div class="item">flex item 15</div>
-        <div class="item">flex item 16</div>
+        <div class="item item-1">flex item 1</div>
+        <div class="item item-2 base">flex item 2</div>
+        <div class="item item-3">flex item 3</div>
+<!--         <div class="item">flex item 4</div>
+        <div class="item">flex item 5</div> -->
     </div>
 </body>
 </html>

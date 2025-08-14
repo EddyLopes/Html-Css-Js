@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid</title>
+
+    <style>
+        .container {
+            display: grid;
+   /*          grid-template-columns: 200px 200px 200px;
+            grid-template-rows: 10px 20px 100px; */
+            /*está linha é equivalente as linhas comentadas acima*/
+            grid-template: 50px 100px 200px / 100px 100px 50px; /*define o tamanho das linhas e colunas*/
+        }
+    </style>
+</head>
+<body>
+    <h1>Create a Simple Grid</h1>
+    <div class="container">
+        <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime, ad.
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi, beatae facilis dicta odit velit.
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quae placeat dolores voluptates nostrum deleniti dolore impedit. Hic.
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui odit labore harum maxime aspernatur vel sint quo doloremque dolore reprehenderit?
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti optio est id consequuntur voluptate odit molestiae, deleniti quo odio tempore!
+        </p>
+        <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum, nobis! Quod nemo ullam rerum voluptate impedit corporis esse blanditiis aspernatur accusantium neque expedita architecto cumque ea, qui officiis, itaque saepe?
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid - Gap</title>
+
+    <style>
+        .grid {
+            display: grid;
+            /* grid-template: 100px 100px 100px / 200px 200px 200px;  *//* Define linhas e colunas */
+            
+            /* grid-column-gap: 2em; */ /* Espaçamento entre as colunas */
+            /* grid-row-gap: 1em; */ /* Espaçamento entre as linhas */
+            /* a linha abaixo substituir as 2 acima */
+            /* grid-gap: 1em 2em; */ /* Espaçamento entre os itens */
+            /* a linha abaixo substitui a linha acima */
+            gap: 1em 2em; /* Espaçamento entre os itens */
+
+
+            /* grid-template-columns: 150px 150px 1fr; */
+            grid-template-columns: 150px 150px 200px;
+            /* align-items: start; */
+        }
+
+        .grid-item {
+            background: #b823c1;
+            color: white;
+            padding: 1em 2em;
+            border: 2px solid purple;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+/*             grid-column-start: 1;
+            grid-column-end: 3; */
+            /* grid-column: 1 / 4; */ /* Define o início e o fim da coluna */
+            
+
+/*             grid-row-start: 1;
+            grid-row-end: 3; */
+            /* grid-row: 1 / 3; */ /* Define o início e o fim da linha */
+            
+        }
+
+        .big {
+            padding: 3em 2em;
+            background: #ff5670;
+        }
+
+        .another-big {
+            padding: 5em 3em;
+            background: plum;
+        }
+
+        .self {
+            align-self: end; /* Alinha o item no centro da linha */
+        }
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <div class="grid-item">grid item</div>
+        <div class="grid-item">grid item</div>
+        <div class="grid-item">grid item</div>
+        <div class="grid-item big">grid item</div>
+        <div class="grid-item">grid item</div>
+        <div class="grid-item">grid item</div>
+    </div>
+</body>
+</html>
