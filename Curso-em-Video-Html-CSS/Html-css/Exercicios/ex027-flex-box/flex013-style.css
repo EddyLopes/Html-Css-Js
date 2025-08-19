@@ -16,14 +16,14 @@ body {
 }
 
 header {
+    background-color: gray;
+    color: white;
+    padding: 10px;
+
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
-
-    background-color: gray;
-    color: white;
-    padding: 10px;
 }
 
 header > h1 {
@@ -34,11 +34,11 @@ header > h1 {
 }
 
 header > nav {
+    border: 1px dotted black;
+    
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
-
-    border: 1px dotted black;
 }
 
 header > nav > a {
